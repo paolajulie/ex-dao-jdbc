@@ -34,7 +34,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             if (rs.next()) {
                 Produto obj = new Produto();
                 obj.setId(rs.getInt("Id"));
-                obj.setName(rs.getString("Name"));
+                obj.setNome(rs.getString("Name"));
                 return obj;
             }
             return null;
@@ -92,7 +92,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
                             "WHERE Id = ?");
 
             st.setString(1, obj.getName());
-            st.setInt(2, obj.getId());
+            st.setInt(2, obj.getIdProduto());
 
             st.executeUpdate();
         }
