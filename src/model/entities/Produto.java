@@ -7,16 +7,28 @@ public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private String name;
+    private String nome;
+    private String preco;
+    private String validade;
+    private String unidade;
 
     public Produto() {
     }
 
-    public Produto(Integer id, String name) {
+    public Produto(Integer id, String nome, String preco, String validade, String unidade) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
+        this.preco = preco;
+        this.validade = validade;
+        this.unidade = unidade;
     }
 
+    public Produto(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    // Getter e Setter para id
     public Integer getId() {
         return id;
     }
@@ -25,12 +37,40 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    // Getter e Setter para nome
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    // Getter e Setter para preco
+    public String getPreco() {
+        return preco;
+    }
+
+    public void setPreco(String preco) {
+        this.preco = preco;
+    }
+
+    // Getter e Setter para validade
+    public String getValidade() {
+        return validade;
+    }
+
+    public void setValidade(String validade) {
+        this.validade = validade;
+    }
+
+    // Getter e Setter para unidade
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
     }
 
     @Override
@@ -60,6 +100,12 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "Produto [id=" + id + ", name=" + name + "]";
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", preco='" + preco + '\'' +
+                ", validade='" + validade + '\'' +
+                ", unidade='" + unidade + '\'' +
+                '}';
     }
 }
