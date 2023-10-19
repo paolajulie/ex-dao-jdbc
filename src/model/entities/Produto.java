@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Produto implements Serializable {
 
@@ -21,14 +22,15 @@ public class Produto implements Serializable {
         this.preco = preco;
         this.vali = vali;
         this.uni = uni;
+
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdProduto() {
+        return idProduto;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdProduto(Integer idProduto) {
+        this.idProduto = idProduto;
     }
 
     public String getNome() {
@@ -61,13 +63,14 @@ public class Produto implements Serializable {
 
     public void setUni(String uni) {
         this.uni = uni;
+
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((idProduto == null) ? 0 : idProduto.hashCode());
         return result;
     }
 
@@ -80,10 +83,10 @@ public class Produto implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Produto other = (Produto) obj;
-        if (id == null) {
-            if (other.id != null)
+        if (idProduto == null) {
+            if (other.idProduto != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!idProduto.equals(other.idProduto))
             return false;
         return true;
     }

@@ -74,6 +74,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setString(4, obj.getUni());
             st.setInt(5, obj.getId());
 
+
             st.executeUpdate();
         }
         catch (SQLException e) {
