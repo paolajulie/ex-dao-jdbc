@@ -23,43 +23,20 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public Produto findById(Integer id) {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        try {
-            st = conn.prepareStatement(
-                    "SELECT * FROM department WHERE Id = ?");
-            st.setInt(1, id);
-            rs = st.executeQuery();
-            if (rs.next()) {
-                Produto obj = new Produto();
-                obj.setId(rs.getInt("Id"));
-                obj.setNome(rs.getString("Name"));
-                return obj;
-            }
-            return null;
-        }
-        catch (SQLException e) {
-            throw new DbException(e.getMessage());
-        }
-        finally {
-            DB.closeStatement(st);
-            DB.closeResultSet(rs);
-        }
-    }
-
-    @Override
     public void insert(Produto obj) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
                     "INSERT INTO produto " +
-                            "(Name) " +
+                            "(nome,preco, vali, uni) " +
                             "VALUES " +
-                            "(?)",
+                            "(?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            st.setString(1, obj.getName());
+            st.setString(1, obj.getNome());
+            st.setString(2, obj.getPreco());
+            st.setString(3, obj.getVali());
+            st.setString(4, obj.getUni());
 
             int rowsAffected = st.executeUpdate();
 
@@ -88,11 +65,15 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         try {
             st = conn.prepareStatement(
                     "UPDATE produto " +
-                            "SET Name = ? " +
+                            "SET Nome = ?, Preco = ?, Vali = ?, Uni = ? " +
                             "WHERE Id = ?");
 
-            st.setString(1, obj.getName());
-            st.setInt(2, obj.getIdProduto());
+            st.setString(1, obj.getNome());
+            st.setString(2, obj.getPreco());
+            st.setString(3, obj.getVali());
+            st.setString(4, obj.getUni());
+            st.setInt(5, obj.getId());
+
 
             st.executeUpdate();
         }
@@ -105,11 +86,72 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
+    public List<Produto> findAll() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "SELECT * FROM eixo ORDER BY Id");
+            rs = st.executeQuery();
+
+            List<Produto> list = new ArrayList<>();
+
+            while (rs.next()) {
+                Produto obj = new Produto();
+                obj.setId(rs.getInt("Id"));
+                obj.setNome(rs.getString("Nome"));
+                obj.setPreco(rs.getString("Preco"));
+                obj.setVali(rs.getString("Validade"));
+                obj.setUni(rs.getString("Unidade"));
+
+                list.add(obj);
+            }
+            return list;
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+
+    @Override
+    public Produto findById(Integer id) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "SELECT * FROM eixo WHERE Id = ?");
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            if (rs.next()) {
+                Produto obj = new Produto();
+                obj.setId(rs.getInt("Id"));
+                obj.setNome(rs.getString("Nome"));
+                obj.setPreco(rs.getString("Preco"));
+                obj.setVali(rs.getString("Validade"));
+                obj.setUni(rs.getString("Unidade"));
+                return obj;
+            }
+            return null;
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+
+    @Override
     public void deleteById(Integer id) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "DELETE FROM produto WHERE Id = ?");
+                    "DELETE FROM eixo WHERE Id = ?");
 
             st.setInt(1, id);
 

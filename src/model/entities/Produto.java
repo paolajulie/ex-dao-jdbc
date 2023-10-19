@@ -7,21 +7,22 @@ public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer idProduto;
+    private Integer id;
     private String nome;
-    private String unidade;
-    private Date validade;
-    private Float preco;
+    private String preco;
+    private String vali;
+    private String uni;
 
     public Produto() {
     }
 
-    public Produto(Integer idProduto, String nome, String unidade, Date validade, Float preco) {
-        this.idProduto = idProduto;
+    public Produto(Integer id, String nome, String preco, String vali, String uni) {
+        this.id = id;
         this.nome = nome;
-        this.unidade = unidade;
-        this.validade = validade;
         this.preco = preco;
+        this.vali = vali;
+        this.uni = uni;
+
     }
 
     public Integer getIdProduto() {
@@ -40,28 +41,29 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public String getUnidade() {
-        return unidade;
-    }
-
-    public void setUnidade(String unidade) {
-        this.unidade = unidade;
-    }
-
-    public Date getValidade() {
-        return validade;
-    }
-
-    public void setValidade(Date validade) {
-        this.validade = validade;
-    }
-
-    public Float getPreco() {
+    public String getPreco() {
         return preco;
     }
 
-    public void setPreco(Float preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
+    }
+
+    public String getVali() {
+        return vali;
+    }
+
+    public void setVali(String vali) {
+        this.vali = vali;
+    }
+
+    public String getUni() {
+        return uni;
+    }
+
+    public void setUni(String uni) {
+        this.uni = uni;
+
     }
 
     @Override
@@ -91,6 +93,12 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "Produto [idProduto=" + idProduto + ", nome=" + nome + ", unidade=" + unidade + ", validade=" + validade + ", preco=" + preco + "]";
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", preco=" + preco +
+                ", vali='" + vali + '\'' +
+                ", uni='" + uni + '\'' +
+                '}';
     }
 }
