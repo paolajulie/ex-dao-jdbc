@@ -39,6 +39,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setString(4, obj.getUni());
 
             int rowsAffected = st.executeUpdate();
+            System.out.println(rowsAffected);
 
             if (rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
