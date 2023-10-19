@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 public class Funcoes {
 
-    static void adicionar() {
+    static void adicionar(){
         Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
 
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
@@ -22,16 +23,16 @@ public class Funcoes {
         System.out.println("Digite o Preco do Produto:");
         String preco = sc.nextLine();
         System.out.println("Digite a Validade do Produto:");
-        String validade = sc.nextLine();
+        String vali = sc.nextLine();
         System.out.println("Digite a Unidade de Medida do Produto:");
-        String unidade = sc.nextLine();
-        Produto produtoNew = new Produto(null, nome, preco, validade, unidade);
-        produtoDao.insert(produtoNew);
-        System.out.println("Adicionado! Novo id: " + produtoNew.getId());
+        String uni = sc.nextLine();
+        Produto newProduto = new Produto(null,nome,preco,vali,uni);
+        produtoDao.insert(newProduto);
+        System.out.println("Adicionado! Novo id: " + newProduto.getId());
         sc.close();
     }
 
-    static void atualizar() {
+    static void atualizar(){
         Scanner sc = new Scanner(System.in);
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
@@ -39,35 +40,33 @@ public class Funcoes {
         System.out.println("|     Atualizar Produto     |\n");
         System.out.println("-----------------------------\n");
         System.out.println("Informe o ID do produto que deseja atualizar:");
-        int productId = sc.nextInt();
-        Produto produtoAtualizado = produtoDao.findById(productId);
-        sc.nextLine();  // Consume the newline character
+        Produto dep2 = produtoDao.findById(sc.nextInt());
         System.out.println("Digite o Nome do Produto:");
-        produtoAtualizado.setNome(sc.nextLine());
+        dep2.setNome(sc.nextLine());
         System.out.println("Digite o Preco do Produto:");
-        produtoAtualizado.setPreco(sc.nextLine());
+        dep2.setPreco(sc.nextLine());
         System.out.println("Digite a Validade do Produto:");
-        produtoAtualizado.setValidade(sc.nextLine());
+        dep2.setVali(sc.nextLine());
         System.out.println("Digite a Unidade de Medida do Produto:");
-        produtoAtualizado.setUnidade(sc.nextLine());
-        produtoDao.update(produtoAtualizado);
+        dep2.setUni(sc.nextLine());
+        produtoDao.update(dep2);
         System.out.println("Atualizacao Completa!");
         sc.close();
     }
 
-    static void listar() {
+    static void listar(){
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
         System.out.println("-----------------------------\n");
         System.out.println("|          Listar           |\n");
         System.out.println("-----------------------------\n");
-        List<Produto> list = produtoDao.listar();
-        for (Produto produto : list) {
-            System.out.println(produto);
+        List<Produto> list = produtoDao.findAll();
+        for (Produto d : list) {
+            System.out.println(d);
         }
     }
 
-    static void listarID() {
+    static void listarID(){
         Scanner sc = new Scanner(System.in);
 
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
@@ -76,13 +75,12 @@ public class Funcoes {
         System.out.println("|        Listar Produto     |\n");
         System.out.println("-----------------------------\n");
         System.out.println("Informe o ID a ser exibido:");
-        int productId = sc.nextInt();
-        Produto produto = produtoDao.findById(id);
-        System.out.println(produto);
+        Produto dep = produtoDao.findById(sc.nextInt());
+        System.out.println(dep);
         sc.close();
     }
 
-    static void deletar() {
+    static void deletar(){
         Scanner sc = new Scanner(System.in);
 
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
@@ -96,4 +94,5 @@ public class Funcoes {
         System.out.println("Produto Excluido!");
         sc.close();
     }
+
 }

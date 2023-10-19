@@ -9,26 +9,20 @@ public class Produto implements Serializable {
     private Integer id;
     private String nome;
     private String preco;
-    private String validade;
-    private String unidade;
+    private String vali;
+    private String uni;
 
     public Produto() {
     }
 
-    public Produto(Integer id, String nome, String preco, String validade, String unidade) {
+    public Produto(Integer id, String nome, String preco, String vali, String uni) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.validade = validade;
-        this.unidade = unidade;
+        this.vali = vali;
+        this.uni = uni;
     }
 
-    public Produto(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
-    // Getter e Setter para id
     public Integer getId() {
         return id;
     }
@@ -37,7 +31,6 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    // Getter e Setter para nome
     public String getNome() {
         return nome;
     }
@@ -46,7 +39,6 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    // Getter e Setter para preco
     public String getPreco() {
         return preco;
     }
@@ -55,22 +47,20 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
-    // Getter e Setter para validade
-    public String getValidade() {
-        return validade;
+    public String getVali() {
+        return vali;
     }
 
-    public void setValidade(String validade) {
-        this.validade = validade;
+    public void setVali(String vali) {
+        this.vali = vali;
     }
 
-    // Getter e Setter para unidade
-    public String getUnidade() {
-        return unidade;
+    public String getUni() {
+        return uni;
     }
 
-    public void setUnidade(String unidade) {
-        this.unidade = unidade;
+    public void setUni(String uni) {
+        this.uni = uni;
     }
 
     @Override
@@ -103,9 +93,9 @@ public class Produto implements Serializable {
         return "Produto{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", preco='" + preco + '\'' +
-                ", validade='" + validade + '\'' +
-                ", unidade='" + unidade + '\'' +
+                ", preco=" + preco +
+                ", vali='" + vali + '\'' +
+                ", uni='" + uni + '\'' +
                 '}';
     }
 }

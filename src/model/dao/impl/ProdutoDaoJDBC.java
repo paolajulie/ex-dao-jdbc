@@ -10,6 +10,7 @@ import java.util.List;
 
 import db.DB;
 import db.DbException;
+import db.DbIntegrityException;
 import model.dao.ProdutoDao;
 import model.entities.Produto;
 
@@ -22,131 +23,144 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public void adcionar(Produto produto) {
+    public void insert(Produto obj) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
                     "INSERT INTO produto " +
-                            "(nome, preco, validade, unidade) " +
+                            "(nome,preco, vali, uni) " +
                             "VALUES " +
                             "(?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            st.setString(1, produto.getNome());
-            st.setString(2, produto.getPreco());
-            st.setString(3, produto.getValidade());
-            st.setString(4, produto.getUnidade());
+            st.setString(1, obj.getNome());
+            st.setString(2, obj.getPreco());
+            st.setString(3, obj.getVali());
+            st.setString(4, obj.getUni());
 
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected > 0) {
-                ResultSet generatedKeys = st.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    int id = generatedKeys.getInt(1);
-                    produto.setId(id);
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    obj.setId(id);
                 }
-            } else {
+            }
+            else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
-        } finally {
+        }
+        finally {
             DB.closeStatement(st);
         }
     }
 
     @Override
-    public List<Produto> listar() {
+    public void update(Produto obj) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "UPDATE produto " +
+                            "SET Nome = ?, Preco = ?, Vali = ?, Uni = ? " +
+                            "WHERE Id = ?");
+
+            st.setString(1, obj.getNome());
+            st.setString(2, obj.getPreco());
+            st.setString(3, obj.getVali());
+            st.setString(4, obj.getUni());
+            st.setInt(5, obj.getId());
+
+            st.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
+    }
+
+    @Override
+    public List<Produto> findAll() {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = conn.prepareStatement("SELECT * FROM produto ORDER BY Id");
+            st = conn.prepareStatement(
+                    "SELECT * FROM eixo ORDER BY Id");
             rs = st.executeQuery();
 
             List<Produto> list = new ArrayList<>();
 
             while (rs.next()) {
-                Produto produto = instantiateProduto(rs);
-                list.add(produto);
+                Produto obj = new Produto();
+                obj.setId(rs.getInt("Id"));
+                obj.setNome(rs.getString("Nome"));
+                obj.setPreco(rs.getString("Preco"));
+                obj.setVali(rs.getString("Validade"));
+                obj.setUni(rs.getString("Unidade"));
+
+                list.add(obj);
             }
             return list;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
-        } finally {
+        }
+        finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
         }
     }
 
-
     @Override
-    public void atualizar(Produto produto) {
-        PreparedStatement st = null;
-        try {
-            st = conn.prepareStatement(
-                    "UPDATE produto " +
-                            "SET nome = ?, preco = ?, validade = ?, unidade = ? " +
-                            "WHERE Id = ?");
-
-            st.setString(1, produto.getNome());
-            st.setString(2, produto.getPreco());
-            st.setString(3, produto.getValidade());
-            st.setString(4, produto.getUnidade());
-            st.setInt(5, produto.getId());
-
-            st.executeUpdate();
-        } catch (SQLException e) {
-            throw new DbException(e.getMessage());
-        } finally {
-            DB.closeStatement(st);
-        }
-    }
-
-    @Override
-    public Produto listarId(Integer id) {
+    public Produto findById(Integer id) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = conn.prepareStatement("SELECT * FROM produto WHERE Id = ?");
+            st = conn.prepareStatement(
+                    "SELECT * FROM eixo WHERE Id = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
-                return instantiateProduto(rs);
+                Produto obj = new Produto();
+                obj.setId(rs.getInt("Id"));
+                obj.setNome(rs.getString("Nome"));
+                obj.setPreco(rs.getString("Preco"));
+                obj.setVali(rs.getString("Validade"));
+                obj.setUni(rs.getString("Unidade"));
+                return obj;
             }
             return null;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DbException(e.getMessage());
-        } finally {
+        }
+        finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
         }
     }
 
     @Override
-    public void deletar(Integer id) {
+    public void deleteById(Integer id) {
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("DELETE FROM produto WHERE Id = ?");
+            st = conn.prepareStatement(
+                    "DELETE FROM eixo WHERE Id = ?");
+
             st.setInt(1, id);
-            int rowsAffected = st.executeUpdate();
-            if (rowsAffected == 0) {
-                throw new DbException("Produto não encontrado para o ID: " + id);
-            }
-        } catch (SQLException e) {
-            throw new DbException(e.getMessage());
-        } finally {
+
+            st.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DbIntegrityException(e.getMessage());
+        }
+        finally {
             DB.closeStatement(st);
         }
-    }
-
-    // Helper method to instantiate a Produto object from a ResultSet
-    private Produto instantiateProduto(ResultSet rs) throws SQLException {
-        Produto produto = new Produto();
-        produto.setId(rs.getInt("Id"));
-        produto.setNome(rs.getString("nome"));
-        produto.setPreco(rs.getString("preco"));
-        produto.setValidade(rs.getString("validade"));
-        produto.setUnidade(rs.getString("unidade"));
-        return produto;
     }
 }
