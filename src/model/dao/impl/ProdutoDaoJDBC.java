@@ -21,40 +21,38 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     @Override
     public void insert(Produto obj) {
         PreparedStatement st = null;
+        ResultSet rs = null;
+
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO produto " +
-                            "(nome,preco, vali, uni) " +
-                            "VALUES " +
-                            "(?,?,?,?)",
-                    Statement.RETURN_GENERATED_KEYS);
+                    "INSERT INTO produto (nome, preco, vali, uni) VALUES (?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
 
             st.setString(1, obj.getNome());
             st.setFloat(2, obj.getPreco());
-            st.setDate(3, (Date) obj.getVali());
+            st.setDate(3, new java.sql.Date(obj.getVali().getTime()));
             st.setString(4, obj.getUni());
 
             int rowsAffected = st.executeUpdate();
-            System.out.println(rowsAffected);
 
             if (rowsAffected > 0) {
-                ResultSet rs = st.getGeneratedKeys();
+                rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
                     obj.setId(id);
                 }
-            }
-            else {
+            } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new DbException(e.getMessage());
-        }
-        finally {
+        } finally {
+            DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
     }
+
 
     @Override
     public void update(Produto obj) {
@@ -88,7 +86,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT * FROM eixo ORDER BY Id");
+                    "SELECT * FROM produto ORDER BY Id");
             rs = st.executeQuery();
 
             List<Produto> list = new ArrayList<>();
@@ -96,10 +94,10 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             while (rs.next()) {
                 Produto obj = new Produto();
                 obj.setId(rs.getInt("Id"));
-                obj.setNome(rs.getString("Nome"));
-                obj.setPreco(rs.getFloat("Preco"));
-                obj.setVali(rs.getDate("Validade"));
-                obj.setUni(rs.getString("Unidade"));
+                obj.setNome(rs.getString("nome"));
+                obj.setPreco(rs.getFloat("preco"));
+                obj.setVali(rs.getDate("vali"));
+                obj.setUni(rs.getString("uni"));
 
                 list.add(obj);
             }
@@ -120,16 +118,16 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT * FROM eixo WHERE Id = ?");
+                    "SELECT * FROM produto WHERE Id = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
                 Produto obj = new Produto();
                 obj.setId(rs.getInt("Id"));
-                obj.setNome(rs.getString("Nome"));
-                obj.setPreco(rs.getFloat("Preco"));
-                obj.setVali(rs.getDate("Validade"));
-                obj.setUni(rs.getString("Unidade"));
+                obj.setNome(rs.getString("nome"));
+                obj.setPreco(rs.getFloat("preco"));
+                obj.setVali(rs.getDate("vali"));
+                obj.setUni(rs.getString("uni"));
                 return obj;
             }
             return null;
@@ -148,7 +146,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "DELETE FROM eixo WHERE Id = ?");
+                    "DELETE FROM produto WHERE Id = ?");
 
             st.setInt(1, id);
 

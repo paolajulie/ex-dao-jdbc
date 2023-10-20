@@ -56,7 +56,7 @@ public class Funcoes {
         System.out.println("Digite o Preco do Produto:");
         dep2.setPreco(Float.parseFloat(sc.nextLine()));
         System.out.println("Digite a Validade do Produto:");
-        SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
         try {
             dep2.setVali(formatoData.parse(sc.nextLine()));
         } catch (ParseException e) {
