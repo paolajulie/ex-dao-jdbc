@@ -5,7 +5,7 @@ USE tradeon;
 CREATE TABLE Produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    preco VARCHAR(20) NOT NULL,
-    vali VARCHAR(10) NOT NULL,
+    preco FLOAT(20) NOT NULL,
+    vali DATE(10) NOT NULL,
     uni VARCHAR(10) NOT NULL
 );

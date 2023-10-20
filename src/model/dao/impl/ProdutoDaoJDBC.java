@@ -1,10 +1,6 @@
 package model.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +30,8 @@ public class ProdutoDaoJDBC implements ProdutoDao {
                     Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, obj.getNome());
-            st.setString(2, obj.getPreco());
-            st.setString(3, obj.getVali());
+            st.setFloat(2, obj.getPreco());
+            st.setDate(3, (Date) obj.getVali());
             st.setString(4, obj.getUni());
 
             int rowsAffected = st.executeUpdate();
@@ -70,8 +66,8 @@ public class ProdutoDaoJDBC implements ProdutoDao {
                             "WHERE Id = ?");
 
             st.setString(1, obj.getNome());
-            st.setString(2, obj.getPreco());
-            st.setString(3, obj.getVali());
+            st.setFloat(2, obj.getPreco());
+            st.setDate(3, (Date) obj.getVali());
             st.setString(4, obj.getUni());
             st.setInt(5, obj.getId());
 
@@ -101,8 +97,8 @@ public class ProdutoDaoJDBC implements ProdutoDao {
                 Produto obj = new Produto();
                 obj.setId(rs.getInt("Id"));
                 obj.setNome(rs.getString("Nome"));
-                obj.setPreco(rs.getString("Preco"));
-                obj.setVali(rs.getString("Validade"));
+                obj.setPreco(rs.getFloat("Preco"));
+                obj.setVali(rs.getDate("Validade"));
                 obj.setUni(rs.getString("Unidade"));
 
                 list.add(obj);
@@ -131,8 +127,8 @@ public class ProdutoDaoJDBC implements ProdutoDao {
                 Produto obj = new Produto();
                 obj.setId(rs.getInt("Id"));
                 obj.setNome(rs.getString("Nome"));
-                obj.setPreco(rs.getString("Preco"));
-                obj.setVali(rs.getString("Validade"));
+                obj.setPreco(rs.getFloat("Preco"));
+                obj.setVali(rs.getDate("Validade"));
                 obj.setUni(rs.getString("Unidade"));
                 return obj;
             }

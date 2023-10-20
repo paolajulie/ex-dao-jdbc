@@ -2,6 +2,7 @@ package model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Produto implements Serializable {
 
@@ -9,14 +10,14 @@ public class Produto implements Serializable {
 
     private Integer id;
     private String nome;
-    private String preco;
-    private String vali;
+    private Float preco;
+    private Date vali;
     private String uni;
 
     public Produto() {
     }
 
-    public Produto(Integer id, String nome, String preco, String vali, String uni) {
+    public Produto(Integer id, String nome, Float preco, Date vali, String uni) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
@@ -29,7 +30,7 @@ public class Produto implements Serializable {
         return id;
     }
 
-    public void setId(Integer idProduto) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,19 +42,19 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public String getPreco() {
+    public Float getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
+    public void setPreco(Float preco) {
         this.preco = preco;
     }
 
-    public String getVali() {
+    public Date getVali() {
         return vali;
     }
 
-    public void setVali(String vali) {
+    public void setVali(Date vali) {
         this.vali = vali;
     }
 
@@ -93,11 +94,12 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return "Produto{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", preco=" + preco +
-                ", vali='" + vali + '\'' +
+                ", vali=" + (vali != null ? sdf.format(vali) : "null") +
                 ", uni='" + uni + '\'' +
                 '}';
     }
