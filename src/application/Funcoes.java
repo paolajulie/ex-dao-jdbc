@@ -4,8 +4,11 @@ import model.dao.DaoFactory;
 import model.dao.ProdutoDao;
 import model.entities.Produto;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class Funcoes {
 
@@ -21,9 +24,16 @@ public class Funcoes {
         System.out.println("Digite o Nome do Produto:");
         String nome = sc.nextLine();
         System.out.println("Digite o Preco do Produto:");
-        String preco = sc.nextLine();
-        System.out.println("Digite a Validade do Produto:");
-        String vali = sc.nextLine();
+        Float preco = Float.parseFloat(sc.nextLine());
+        System.out.println("Digite a Validade do Produto (no formato dd/MM/yyyy):");
+        String valiString = sc.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date vali = null;
+        try {
+            vali = sdf.parse(valiString);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Digite a Unidade de Medida do Produto:");
         String uni = sc.nextLine();
         Produto newProduto = new Produto(null,nome,preco,vali,uni);
@@ -44,9 +54,14 @@ public class Funcoes {
         System.out.println("Digite o Nome do Produto:");
         dep2.setNome(sc.nextLine());
         System.out.println("Digite o Preco do Produto:");
-        dep2.setPreco(sc.nextLine());
+        dep2.setPreco(Float.parseFloat(sc.nextLine()));
         System.out.println("Digite a Validade do Produto:");
-        dep2.setVali(sc.nextLine());
+        SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            dep2.setVali(formatoData.parse(sc.nextLine()));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("Digite a Unidade de Medida do Produto:");
         dep2.setUni(sc.nextLine());
         produtoDao.update(dep2);
