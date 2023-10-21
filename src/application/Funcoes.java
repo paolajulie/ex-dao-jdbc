@@ -36,7 +36,6 @@ public class Funcoes {
         Produto newProduto = new Produto(null,nome,preco,vali,uni);
         produtoDao.insert(newProduto);
         System.out.println("Adicionado! Novo id: " + newProduto.getId());
-        sc.close();
     }
 
     static void atualizarProduto(){
@@ -80,7 +79,6 @@ public class Funcoes {
         System.out.println("Informe o ID a ser exibido:");
         Produto dep = produtoDao.findById(sc.nextInt());
         System.out.println(dep);
-        sc.close();
     }
 
     static void deletarProduto(){
@@ -92,7 +90,6 @@ public class Funcoes {
         int id = sc.nextInt();
         produtoDao.deleteById(id);
         System.out.println("Produto Excluido!");
-        sc.close();
     }
 
 }

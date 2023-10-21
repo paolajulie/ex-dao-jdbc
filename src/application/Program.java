@@ -10,12 +10,13 @@ import model.entities.Produto;
 public class Program extends Funcoes {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int esc;
+        int esc = 0;
         int sair = 0;
         int subSair = 0;
 
         do {
             System.out.println("Selecione a opção desejada:\n[1] - Entrada\n[2] - Estoque\n[3] - Fornecedor\n[4] - Produto\n[5] - Usuario\n[6] - Vendas\n[0] - Sair\n->");
+
             esc = scanner.nextInt();
 
             switch (esc) {
