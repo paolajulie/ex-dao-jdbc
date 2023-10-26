@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Entrada implements Serializable {
@@ -71,6 +72,11 @@ public class Entrada implements Serializable {
 
     @Override
     public String toString() {
-        return "Entrada [idEntrada=" + idEntrada + ", observacao=" + observacao + ", dataEntrada=" + dataEntrada + "]";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return "Entrada{" +
+                "idEntrada=" + idEntrada +
+                ", observacao='" + observacao + '\'' +
+                ", dataEntrada=" + (dataEntrada != null ? sdf.format(dataEntrada) : "null") +
+                '}';
     }
 }

@@ -30,31 +30,31 @@ public class Program extends Funcoes {
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Adcionar Entrada      |\n");
                                 System.out.println("-----------------------------\n");
-                                // adicionarEntrada();
+                                adicionarEntrada();
                                 break;
                             case 2:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Atualizar Entrada     |\n");
                                 System.out.println("-----------------------------\n");
-                                // atualizarEntrada();
+                                atualizarEntrada();
                                 break;
                             case 3:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Listar Entradas     |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarEntradas();
+                                listarEntrada();
                                 break;
                             case 4:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Listar por ID       |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarIDEntradas();
+                                listarIDEntrada();
                                 break;
                             case 5:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Deletar Entrada     |\n");
                                 System.out.println("-----------------------------\n");
-                                // deletarEntrada();
+                                deletarEntrada();
                                 break;
                             case 0:
 
