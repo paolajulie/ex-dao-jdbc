@@ -1,11 +1,6 @@
 package application;
 
-import java.util.List;
 import java.util.Scanner;
-
-import model.dao.DaoFactory;
-import model.dao.ProdutoDao;
-import model.entities.Produto;
 
 public class Program extends Funcoes {
     public static void main(String[] args) {

@@ -44,6 +44,7 @@ public class Funcoes {
 
         System.out.println("Informe o ID do produto que deseja atualizar:");
         Produto dep2 = produtoDao.findById(sc.nextInt());
+        sc.nextLine();
         System.out.println("Digite o Nome do Produto:");
         dep2.setNome(sc.nextLine());
         System.out.println("Digite o Preco do Produto:");
@@ -59,7 +60,7 @@ public class Funcoes {
         dep2.setUni(sc.nextLine());
         produtoDao.update(dep2);
         System.out.println("Atualizacao Completa!");
-        sc.close();
+
     }
 
     static void listarProduto(){

@@ -65,7 +65,9 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
             st.setString(1, obj.getNome());
             st.setFloat(2, obj.getPreco());
-            st.setDate(3, (Date) obj.getVali());
+            java.util.Date utilDate = obj.getVali();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            st.setDate(3, sqlDate);
             st.setString(4, obj.getUni());
             st.setInt(5, obj.getId());
 
