@@ -7,7 +7,7 @@ public class Estoque implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer idEstoque;
-    private String custo;
+    private float custo;
     private String descricao;
     private Integer qtd;
     private Integer min;
@@ -15,10 +15,10 @@ public class Estoque implements Serializable {
     private String unidade;
     private Boolean status;
 
-    public Estoque() {
+    public Estoque(Object object, Float custo2, String descricao2, int quantidade, int min2, int max2, boolean statusEstoque) {
     }
 
-    public Estoque(Integer idEstoque, String custo, String descricao, Integer qtd, Integer min, Integer max, String unidade, Boolean status) {
+    public Estoque(Integer idEstoque, float custo, String descricao, Integer qtd, Integer min, Integer max, String unidade, Boolean status) {
         this.idEstoque = idEstoque;
         this.custo = custo;
         this.descricao = descricao;
@@ -29,6 +29,9 @@ public class Estoque implements Serializable {
         this.status = status;
     }
 
+    public Estoque() {
+    }
+
     public Integer getIdEstoque() {
         return idEstoque;
     }
@@ -37,12 +40,12 @@ public class Estoque implements Serializable {
         this.idEstoque = idEstoque;
     }
 
-    public String getCusto() {
+    public float getCusto() {
         return custo;
     }
 
-    public void setCusto(String custo) {
-        this.custo = custo;
+    public void setCusto(float f) {
+        this.custo = f;
     }
 
     public String getDescricao() {
@@ -123,5 +126,19 @@ public class Estoque implements Serializable {
     public String toString() {
         return "Estoque [idEstoque=" + idEstoque + ", custo=" + custo + ", descricao=" + descricao + ", qtd=" + qtd
                 + ", min=" + min + ", max=" + max + ", unidade=" + unidade + ", status=" + status + "]";
+    }
+
+    public void setQuantidade(int parseInt) {
+    }
+
+    public void setStatusEstoque(boolean parseBoolean) {
+    }
+
+    public int getQuantidade() {
+        return 0;
+    }
+
+    public boolean getStatusEstoque() {
+        return false;
     }
 }

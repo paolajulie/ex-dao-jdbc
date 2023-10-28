@@ -3,6 +3,7 @@ package model.dao;
 import db.DB;
 import model.dao.impl.EntradaDaoJDBC;
 import model.dao.impl.ProdutoDaoJDBC;
+import model.dao.impl.EstoqueDaoJDBC;
 
 public class DaoFactory {
 
@@ -12,5 +13,9 @@ public class DaoFactory {
 
     public static EntradaDao createEntradaDao() {
         return new EntradaDaoJDBC(DB.getConnection());
+    }
+
+    public static EstoqueDao createEstoqueDao() {
+        return new EstoqueDaoJDBC(DB.getConnection());
     }
 }
