@@ -19,7 +19,11 @@ public class DaoFactory {
     public static EstoqueDao createEstoqueDao() {
         return new EstoqueDaoJDBC(DB.getConnection());
     }
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> da7da01266ab8afe7ce18557b06113101d3fcec7
     public static UsuarioDao createUsuarioDao() {
         return new UsuarioDaoJDBC(DB.getConnection());
     }
