@@ -83,31 +83,31 @@ public class Program extends Funcoes {
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Adcionar Estoque      |\n");
                                 System.out.println("-----------------------------\n");
-                                // adicionarEstoque();
+                                adicionarEstoque();
                                 break;
                             case 2:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Atualizar Estoque     |\n");
                                 System.out.println("-----------------------------\n");
-                                // atualizarEstoque();
+                                atualizarEstoque();
                                 break;
                             case 3:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Listar Estoque      |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarEstoque();
+                                listarEstoque();
                                 break;
                             case 4:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Listar por ID       |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarIDEstoque();
+                                listarIDEstoque();
                                 break;
                             case 5:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Deletar Estoque     |\n");
                                 System.out.println("-----------------------------\n");
-                                // deletarEstoque();
+                                deletarEstoque();
                                 break;
                             case 0:
 

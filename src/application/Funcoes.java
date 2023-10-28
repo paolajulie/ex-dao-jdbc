@@ -3,8 +3,10 @@ package application;
 import model.dao.DaoFactory;
 import model.dao.ProdutoDao;
 import model.dao.EntradaDao;
+import model.dao.EstoqueDao;
 import model.entities.Produto;
 import model.entities.Entrada;
+import model.entities.Estoque;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -172,4 +174,100 @@ public class Funcoes {
         System.out.println("Produto Excluido!");
     }
 
+
+
+
+
+        static void adicionarEstoque(){
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
+
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|    Adicionar Estoque      |\n");
+        System.out.println("-----------------------------\n");
+        System.out.println("Digite o Custo do Estoque:");
+        Float custo = Float.parseFloat(sc.nextLine());
+        System.out.println("Digite a Descrição do Estoque:");
+        String descricao = sc.nextLine();
+        System.out.println("Digite a Quantidade do Estoque:");
+        int quantidade = Integer.parseInt(sc.nextLine());
+        System.out.println("Digite o Mínimo do Estoque:");
+        int min = Integer.parseInt(sc.nextLine());
+        System.out.println("Digite o Máximo do Estoque:");
+        int max = Integer.parseInt(sc.nextLine());
+        System.out.println("Digite o Status do Estoque (true/false):");
+        boolean statusEstoque = Boolean.parseBoolean(sc.nextLine());
+
+        Estoque newEstoque = new Estoque(null, custo, descricao, quantidade, min, max, statusEstoque);
+        estoqueDao.insert(newEstoque);
+        System.out.println("Adicionado! Novo idEstoque: " + newEstoque.getIdEstoque());
+        sc.close();
+    }
+
+    static void atualizarEstoque(){
+        Scanner sc = new Scanner(System.in);
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|    Atualizar Estoque      |\n");
+        System.out.println("-----------------------------\n");
+        System.out.println("Informe o ID do estoque que deseja atualizar:");
+        Estoque estoque = estoqueDao.findById(sc.nextInt());
+        System.out.println("Digite o Custo do Estoque:");
+        estoque.setCusto(Float.parseFloat(sc.nextLine()));
+        System.out.println("Digite a Descrição do Estoque:");
+        estoque.setDescricao(sc.nextLine());
+        System.out.println("Digite a Quantidade do Estoque:");
+        estoque.setQuantidade(Integer.parseInt(sc.nextLine()));
+        System.out.println("Digite o Mínimo do Estoque:");
+        estoque.setMin(Integer.parseInt(sc.nextLine()));
+        System.out.println("Digite o Máximo do Estoque:");
+        estoque.setMax(Integer.parseInt(sc.nextLine()));
+        System.out.println("Digite o Status do Estoque (true/false):");
+        estoque.setStatusEstoque(Boolean.parseBoolean(sc.nextLine()));
+        estoqueDao.update(estoque);
+        System.out.println("Atualização Completa!");
+        sc.close();
+    }
+
+    static void listarEstoque(){
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|        Listar Estoque      |\n");
+        System.out.println("-----------------------------\n");
+        List<Estoque> list = estoqueDao.findAll();
+        for (Estoque estoque : list) {
+            System.out.println(estoque);
+        }
+    }
+
+    static void listarIDEstoque(){
+        Scanner sc = new Scanner(System.in);
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|   Listar Estoque por ID    |\n");
+        System.out.println("-----------------------------\n");
+        System.out.println("Informe o ID do estoque a ser exibido:");
+        Estoque estoque = estoqueDao.findById(sc.nextInt());
+        System.out.println(estoque);
+        sc.close();
+    }
+
+    static void deletarEstoque(){
+        Scanner sc = new Scanner(System.in);
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|      Deletar Estoque       |\n");
+        System.out.println("-----------------------------\n");
+        System.out.print("Insira o ID do Estoque a ser Excluído: ");
+        int idEstoque = sc.nextInt();
+        estoqueDao.deleteById(idEstoque);
+        System.out.println("Estoque Excluído!");
+        sc.close();
+    }
 }
