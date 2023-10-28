@@ -18,4 +18,8 @@ public class DaoFactory {
     public static EstoqueDao createEstoqueDao() {
         return new EstoqueDaoJDBC(DB.getConnection());
     }
+    
+    public static UsuarioDao createUsuarioDao() {
+        return new UsuarioDaoJDBC(DB.getConnection());
+    }
 }
