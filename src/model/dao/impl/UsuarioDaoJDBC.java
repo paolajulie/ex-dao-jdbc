@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package model.dao.impl;
 
 import java.sql.*;
@@ -320,4 +319,3 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }
     }
 }
->>>>>>> da7da01266ab8afe7ce18557b06113101d3fcec7
