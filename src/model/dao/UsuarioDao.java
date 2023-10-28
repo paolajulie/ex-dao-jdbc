@@ -1,13 +1,13 @@
 package model.dao;
 
 import java.util.List;
-import model.entities.Estoque;
+import model.entities.Usuario;
 
 public interface UsuarioDao {
 
     void insert(Usuario obj);
     void update(Usuario obj);
     void deleteById(Integer idUsuario);
-    Estoque findById(Integer idUsuario);
-    List<usuario> findAll();
+    Usuario findById(Integer idUsuario);
+    List<Usuario> findAll();
 }
