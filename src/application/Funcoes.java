@@ -5,10 +5,12 @@ import model.dao.ProdutoDao;
 import model.dao.EntradaDao;
 import model.dao.EstoqueDao;
 import model.dao.UsuarioDao;
+import model.dao.VendasDao;
 import model.entities.Produto;
 import model.entities.Entrada;
 import model.entities.Estoque;
 import model.entities.Usuario;
+import model.entities.Vendas;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -89,6 +91,91 @@ public class Funcoes {
         entradaDao.deleteById(id);
         System.out.println("Produto Excluido!");
     }
+
+
+
+
+
+
+
+
+
+     public static void adicionarVenda() {
+        Scanner sc = new Scanner(System.in);
+
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.println("Digite a Observação da Venda:");
+        String observacao = sc.nextLine();
+        System.out.println("Digite a Data de Entrada (no formato dd/MM/yyyy):");
+        String dataEntradaString = sc.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataEntrada = null;
+        try {
+            dataEntrada = sdf.parse(dataEntradaString);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Digite o ID do Usuário:");
+        int idUsuario = sc.nextInt();
+        Vendas newVenda = new Vendas(null, observacao, dataEntrada, idUsuario);
+        vendasDao.insert(newVenda);
+        System.out.println("Adicionado! Novo id: " + newVenda.getIdVendas());
+    }
+
+    public static void atualizarVenda() {
+        Scanner sc = new Scanner(System.in);
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.println("Informe o ID da venda que deseja atualizar:");
+        int idVendas = sc.nextInt();
+        Vendas venda = vendasDao.findById(idVendas);
+        sc.nextLine();
+        System.out.println("Digite a Observação da Venda:");
+        venda.setObservacao(sc.nextLine());
+        System.out.println("Digite a Data de Entrada (no formato dd/MM/yyyy):");
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date dataEntrada = formatoData.parse(sc.nextLine());
+            venda.setDataEntrada(dataEntrada);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        vendasDao.update(venda);
+        System.out.println("Atualização Completa!");
+    }
+
+    public static void listarVendas() {
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        List<Vendas> list = vendasDao.findAll();
+        for (Vendas venda : list) {
+            System.out.println(venda);
+        }
+    }
+
+    public static void listarVendaPorID() {
+        Scanner sc = new Scanner(System.in);
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.println("Informe o ID da venda a ser exibida:");
+        int idVendas = sc.nextInt();
+        Vendas venda = vendasDao.findById(idVendas);
+        System.out.println(venda);
+    }
+
+    public static void deletarVenda() {
+        Scanner sc = new Scanner(System.in);
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.print("Insira o ID da Venda a ser Excluída: ");
+        int idVendas = sc.nextInt();
+        vendasDao.deleteById(idVendas);
+        System.out.println("Venda Excluída!");
+    }
+
+    
+
 
 
 
