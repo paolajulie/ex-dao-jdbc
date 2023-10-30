@@ -11,7 +11,7 @@ public class Vendas implements Serializable {
     private String observacao;
     private Date dataSaida;
 
-    public Vendas() {
+    public Vendas(Vendas obj, Object object, Object object2, int i) {
     }
 
     public Vendas(Integer idVendas, String observacao, Date dataSaida) {
@@ -72,5 +72,15 @@ public class Vendas implements Serializable {
     @Override
     public String toString() {
         return "Vendas [idVendas=" + idVendas + ", observacao=" + observacao + ", dataSaida=" + dataSaida + "]";
+    }
+
+    public Date getDataEntrada() {
+        return null;
+    }
+
+    public void setDataEntrada(java.sql.Date date) {
+    }
+
+    public void setDataEntrada(Date dataEntrada) {
     }
 }
