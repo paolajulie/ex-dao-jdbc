@@ -4,11 +4,8 @@ import model.dao.DaoFactory;
 import model.dao.ProdutoDao;
 import model.dao.EntradaDao;
 import model.dao.EstoqueDao;
-import model.dao.UsuarioDao;
-import model.entities.Produto;
-import model.entities.Entrada;
-import model.entities.Estoque;
-import model.entities.Usuario;
+import model.dao.FornecedorDao;
+import model.entities.*;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -94,7 +91,7 @@ public class Funcoes {
 
 
 
-
+    //produto
     static void adicionarProduto(){
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
@@ -263,96 +260,91 @@ public class Funcoes {
         Scanner sc = new Scanner(System.in);
         EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
 
-        System.out.println("-----------------------------\n");
-        System.out.println("|      Deletar Estoque       |\n");
-        System.out.println("-----------------------------\n");
         System.out.print("Insira o ID do Estoque a ser Excluído: ");
         int idEstoque = sc.nextInt();
         estoqueDao.deleteById(idEstoque);
         System.out.println("Estoque Excluído!");
         sc.close();
     }
-}
-//usuario
-static void adicionarUsuario() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 
-    System.out.println("Digite o Nome do Usuário:");
-    String nome = sc.nextLine();
-    System.out.println("Digite o ID do Usuário:");
-    int id = sc.nextInt();
-    sc.nextLine(); // Limpar a quebra de linha
-    System.out.println("Digite a Senha do Usuário:");
-    String senha = sc.nextLine();
-    System.out.println("Digite o CPF do Usuário:");
-    String cpf = sc.nextLine();
 
-    Usuario newUsuario = new Usuario(id, senha, nome, cpf);
-    usuarioDao.insert(newUsuario);
-    System.out.println("Usuário Adicionado! Novo ID: " + newUsuario.getId());
-}
 
-static void atualizarUsuario() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+//fornecedores
 
-    System.out.println("Informe o ID do usuário que deseja atualizar:");
-    int userId = sc.nextInt();
-    Usuario usuario = usuarioDao.findById(userId);
-    sc.nextLine(); // Limpar a quebra de linha
+    static void adicionarFornecedor(){
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
 
-    if (usuario != null) {
-        System.out.println("Digite o Novo Nome do Usuário:");
-        usuario.setNome(sc.nextLine());
-        System.println("Digite a Nova Senha do Usuário:");
-        usuario.setSenha(sc.nextLine());
-        System.out.println("Digite o Novo CPF do Usuário:");
-        usuario.setCpf(sc.nextLine());
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
 
-        usuarioDao.update(usuario);
-        System.out.println("Atualização Completa!");
-    } else {
-        System.out.println("Usuário não encontrado.");
+        System.out.println("Digite o nome:");
+        String nome = sc.nextLine();
+        System.out.println("Digite o Cnpj:");
+        String cnpj = sc.nextLine();
+        System.out.println("Digite a localizacao:");
+        String localizacao = sc.nextLine();
+        System.out.println("Digite o contato:");
+        String contato = sc.nextLine();
+
+        Fornecedor newFornecedor = new Fornecedor(null,nome,cnpj ,localizacao,contato);
+        fornecedorDao.insert(newFornecedor);
+        System.out.println("Adicionado! Novo id: " + newFornecedor.getIdFornecedor());
     }
-}
 
-static void listarUsuarios() {
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+    static void atualizarFornecedor(){
+        Scanner sc = new Scanner(System.in);
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
 
-    List<Usuario> userList = usuarioDao.findAll();
-    for (Usuario user : userList) {
-        System.out.println(user);
+        System.out.println("Informe o ID do Fornecedor que deseja atualizar:");
+        Fornecedor dep2 = fornecedorDao.findById(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Digite o Nome do Fornecedor:");
+        dep2.setNome(sc.nextLine());
+        System.out.println("Digite o Cnpj do Fornecedor:");
+        dep2.setCnpj(sc.nextLine());
+        System.out.println("Digite a Localização do Fornecedor:");
+        dep2.setLocalizacao(sc.nextLine());
+        System.out.println("Digite o Contato do Fornecedor:");
+        dep2.setContato(sc.nextLine());
+        fornecedorDao.update(dep2);
+        System.out.println("Atualizacao Completa!");
+
     }
-}
 
-static void listarUsuarioPorID() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+    static void listarFornecedor() {
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
 
-    System.out.println("Informe o ID do usuário a ser exibido:");
-    int userId = sc.nextInt();
-    Usuario usuario = usuarioDao.findById(userId);
-
-    if (usuario != null) {
-        System.out.println(usuario);
-    } else {
-        System.out.println("Usuário não encontrado.");
+        List<Fornecedor> list = fornecedorDao.findAll();
+        for (Fornecedor fornecedor : list) {
+            System.out.println(fornecedor);
+        }
     }
-}
 
-static void deletarUsuario() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 
-    System.out.print("Insira o ID do Usuário a ser Excluído: ");
-    int userId = sc.nextInt();
-    boolean deleted = usuarioDao.deleteById(userId);
+    static void listarIDFornecedor() {
+        Scanner sc = new Scanner(System.in);
 
-    if (deleted) {
-        System.out.println("Usuário Excluído!");
-    } else {
-        System.out.println("Usuário não encontrado.");
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
+
+        System.out.println("Informe o ID a ser exibido:");
+        Fornecedor fornecedor = fornecedorDao.findById(sc.nextInt());
+        System.out.println(fornecedor);
     }
+
+    static void deletarFornecedor() {
+        Scanner sc = new Scanner(System.in);
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
+
+        System.out.print("Insira o ID do Fornecedor a ser Excluído: ");
+        int idFornecedor = sc.nextInt();
+        fornecedorDao.deleteById(idFornecedor);
+        System.out.println("Fornecedor Excluído!");
+
+    }
+
+
+
+
 }
-}
+
+
