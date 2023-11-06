@@ -135,31 +135,31 @@ public class Program extends Funcoes {
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Adcionar Fornecedor   |\n");
                                 System.out.println("-----------------------------\n");
-                                // adicionarFornecedor();
+                                adicionarFornecedor();
                                 break;
                             case 2:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|    Atualizar Fornecedor   |\n");
                                 System.out.println("-----------------------------\n");
-                                // atualizarFornecedor();
+                                atualizarFornecedor();
                                 break;
                             case 3:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Listar Fornecedor     |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarFornecedor();
+                                listarFornecedor();
                                 break;
                             case 4:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Listar por ID       |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarIDFornecedor();
+                                listarIDFornecedor();
                                 break;
                             case 5:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Deletar Fornecedor    |\n");
                                 System.out.println("-----------------------------\n");
-                                // deletarFornecedor();
+                                deletarFornecedor();
                                 break;
                             default:
                                 System.out.println("Opção inválida. Tente novamente.");
