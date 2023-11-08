@@ -7,30 +7,30 @@ import java.util.List;
 import db.DB;
 import db.DbException;
 import db.DbIntegrityException;
-import model.dao.EntradaDao;
-import model.entities.Entrada;
+import model.dao.VendasDao;
+import model.entities.Vendas;
 
-public class EntradaDaoJDBC implements EntradaDao {
+public class VendasDaoJDBC implements VendasDao {
 
-    private final Connection conn;
+    private Connection conn;
 
-    public EntradaDaoJDBC(Connection conn) {
+    public VendasDaoJDBC(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public void insertEntrada(Entrada obj) {
+    public void insert(Vendas obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO entrada (observacao, dataEntrada) VALUES (?, ?)",
+                    "INSERT INTO Vendas (observacao, dataSaida) VALUES (?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
 
             st.setString(1, obj.getObservacao());
-            st.setDate(2, new java.sql.Date(obj.getDataEntrada().getTime()));
+            st.setDate(2, new java.sql.Date(obj.getDataSaida().getTime()));
 
             int rowsAffected = st.executeUpdate();
 
@@ -38,7 +38,7 @@ public class EntradaDaoJDBC implements EntradaDao {
                 rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    obj.setIdEntrada(id);
+                    obj.setIdVendas(id);
                 }
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
@@ -51,22 +51,20 @@ public class EntradaDaoJDBC implements EntradaDao {
         }
     }
 
-
     @Override
-    public void update(Entrada obj) {
+    public void update(Vendas obj) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "UPDATE entrada " +
-                            "SET Observacao = ?, DataEntrada = ?" +
-                            "WHERE Id = ?");
+                    "UPDATE Vendas " +
+                            "SET observacao = ?, dataSaida = ?" +
+                            "WHERE IdVendas = ?");
 
             st.setString(1, obj.getObservacao());
-            java.util.Date utilDate = obj.getDataEntrada();
+            java.util.Date utilDate = obj.getDataSaida();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             st.setDate(2, sqlDate);
-            st.setInt(3, obj.getIdEntrada());
-
+            st.setInt(3, obj.getIdVendas());
 
             st.executeUpdate();
         }
@@ -79,21 +77,21 @@ public class EntradaDaoJDBC implements EntradaDao {
     }
 
     @Override
-    public List<Entrada> findAll() {
+    public List<Vendas> findAll() {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT * FROM entrada ORDER BY IdEntrada");
+                    "SELECT * FROM Vendas ORDER BY IdVendas");
             rs = st.executeQuery();
 
-            List<Entrada> list = new ArrayList<>();
+            List<Vendas> list = new ArrayList<>();
 
             while (rs.next()) {
-                Entrada obj = new Entrada();
-                obj.setIdEntrada(rs.getInt("idEntrada"));
+                Vendas obj = new Vendas();
+                obj.setIdVendas(rs.getInt("IdVendas"));
                 obj.setObservacao(rs.getString("observacao"));
-                obj.setDataEntrada(rs.getDate("dataEntrada"));
+                obj.setDataSaida(rs.getDate("dataSaida"));
 
                 list.add(obj);
             }
@@ -109,19 +107,19 @@ public class EntradaDaoJDBC implements EntradaDao {
     }
 
     @Override
-    public Entrada findById(Integer id) {
+    public Vendas findById(Integer id) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT * FROM entrada WHERE IdEntrada = ?");
+                    "SELECT * FROM Vendas WHERE IdVendas = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
-                Entrada obj = new Entrada();
-                obj.setIdEntrada(rs.getInt("IdEntrada"));
+                Vendas obj = new Vendas();
+                obj.setIdVendas(rs.getInt("IdEntrada"));
                 obj.setObservacao(rs.getString("observacao"));
-                obj.setDataEntrada(rs.getDate("dataEntrada"));
+                obj.setDataEntrada(rs.getDate("dataSaida"));
                 return obj;
             }
             return null;
@@ -140,7 +138,7 @@ public class EntradaDaoJDBC implements EntradaDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "DELETE FROM entrada WHERE IdEntrada = ?");
+                    "DELETE FROM Vendas WHERE IdVendas = ?");
 
             st.setInt(1, id);
 
@@ -154,3 +152,4 @@ public class EntradaDaoJDBC implements EntradaDao {
         }
     }
 }
+

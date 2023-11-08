@@ -25,7 +25,6 @@ public class Funcoes {
 
     static void adicionarEntrada(){
         Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
 
         EntradaDao entradaDao = DaoFactory.createEntradaDao();
 
@@ -90,8 +89,8 @@ public class Funcoes {
         EntradaDao entradaDao = DaoFactory.createEntradaDao();
 
         System.out.print("Insira o ID da Entrada a ser Excluido: ");
-        int id = sc.nextInt();
-        entradaDao.deleteById(id);
+        int idEntrada = sc.nextInt();
+        entradaDao.deleteById(idEntrada);
         System.out.println("Produto Excluido!");
     }
 
@@ -99,7 +98,6 @@ public class Funcoes {
 
     static void adicionarEstoque(){
         Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
 
         EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
 
@@ -191,7 +189,6 @@ public class Funcoes {
 
     static void adicionarFornecedor(){
         Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
 
         FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
 
@@ -263,7 +260,6 @@ public class Funcoes {
 
     static void adicionarProduto(){
         Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
 
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
@@ -404,12 +400,84 @@ public class Funcoes {
         UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 
         System.out.print("Insira o ID do Usuario a ser Excluido: ");
-        int id = sc.nextInt();
-        usuarioDao.deleteById(id);
+        int idUsuario = sc.nextInt();
+        usuarioDao.deleteById(idUsuario);
         System.out.println("Produto Excluido!");
     }
 
-    /* ---------- VENDA ---------- */
+    /* ---------- VENDAS ---------- */
+
+    static void adicionarVendas(){
+        Scanner sc = new Scanner(System.in);
+
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.println("Digite a Observacao da Venda:");
+        String observacao = sc.nextLine();
+        System.out.println("Digite a Data de Venda (no formato dd/MM/yyyy):");
+        String dataSaidaString = sc.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataSaida = null;
+        try {
+            dataSaida = sdf.parse(dataSaidaString);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+        Vendas newVendas = new Vendas(null,observacao,dataSaida);
+        vendasDao.insert(newVendas);
+        System.out.println("Adicionado! Novo id: " + newVendas.getIdVendas());
+    }
+
+    static void atualizarVendas(){
+        Scanner sc = new Scanner(System.in);
+
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.println("Informe o ID da Venda que deseja atualizar:");
+        Vendas dep2 = vendasDao.findById(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Digite a Observacao da Venda:");
+        dep2.setObservacao(sc.nextLine());
+        System.out.println("Digite a Data da Venda :");
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dep2.setDataSaida(formatoData.parse(sc.nextLine()));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        vendasDao.update(dep2);
+        System.out.println("Atualizacao Completa!");
+    }
+
+    static void listarVendas(){
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        List<Vendas> list = vendasDao.findAll();
+        for (Vendas d : list) {
+            System.out.println(d);
+        }
+    }
+
+    static void listarIDVendas(){
+        Scanner sc = new Scanner(System.in);
+
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.println("Informe o ID a ser exibido:");
+        Vendas dep = vendasDao.findById(sc.nextInt());
+        System.out.println(dep);
+    }
+
+    static void deletarVendas(){
+        Scanner sc = new Scanner(System.in);
+
+        VendasDao vendasDao = DaoFactory.createVendasDao();
+
+        System.out.print("Insira o ID da Venda a ser Excluido: ");
+        int idVendas = sc.nextInt();
+        vendasDao.deleteById(idVendas);
+        System.out.println("Venda Excluida!");
+    }
 
 }
 
