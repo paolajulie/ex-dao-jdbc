@@ -5,19 +5,12 @@ import model.dao.ProdutoDao;
 import model.dao.EntradaDao;
 import model.dao.EstoqueDao;
 import model.dao.FornecedorDao;
-import model.entities.*;
 import model.dao.UsuarioDao;
 import model.dao.VendasDao;
 import model.entities.Produto;
 import model.entities.Entrada;
 import model.entities.Estoque;
-import model.entities.Usuario;
-import model.entities.Vendas;
-import model.dao.UsuarioDao;
-import model.dao.VendasDao;
-import model.entities.Produto;
-import model.entities.Entrada;
-import model.entities.Estoque;
+import model.entities.Fornecedor;
 import model.entities.Usuario;
 import model.entities.Vendas;
 import java.text.ParseException;
@@ -27,6 +20,8 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 
 public class Funcoes {
+
+    /* ---------- ENTRADA ---------- */
 
     static void adicionarEntrada(){
         Scanner sc = new Scanner(System.in);
@@ -100,169 +95,9 @@ public class Funcoes {
         System.out.println("Produto Excluido!");
     }
 
+    /* ---------- ESTOQUE ---------- */
 
-
-
-     public static void adicionarVenda() {
-        Scanner sc = new Scanner(System.in);
-
-        VendasDao vendasDao = DaoFactory.createVendasDao();
-
-        System.out.println("Digite a Observação da Venda:");
-        String observacao = sc.nextLine();
-        System.out.println("Digite a Data de Entrada (no formato dd/MM/yyyy):");
-        String dataEntradaString = sc.nextLine();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date dataEntrada = null;
-        try {
-            dataEntrada = sdf.parse(dataEntradaString);
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("Digite o ID do Usuário:");
-        int idUsuario = sc.nextInt();
-        Vendas newVenda = new Vendas(null, observacao, dataEntrada, idUsuario);
-        vendasDao.insert(newVenda);
-        System.out.println("Adicionado! Novo id: " + newVenda.getIdVendas());
-    }
-
-    public static void atualizarVenda() {
-        Scanner sc = new Scanner(System.in);
-        VendasDao vendasDao = DaoFactory.createVendasDao();
-
-        System.out.println("Informe o ID da venda que deseja atualizar:");
-        int idVendas = sc.nextInt();
-        Vendas venda = vendasDao.findById(idVendas);
-        sc.nextLine();
-        System.out.println("Digite a Observação da Venda:");
-        venda.setObservacao(sc.nextLine());
-        System.out.println("Digite a Data de Entrada (no formato dd/MM/yyyy):");
-        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            Date dataEntrada = formatoData.parse(sc.nextLine());
-            venda.setDataEntrada(dataEntrada);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        vendasDao.update(venda);
-        System.out.println("Atualização Completa!");
-    }
-
-    public static void listarVendas() {
-        VendasDao vendasDao = DaoFactory.createVendasDao();
-
-        List<Vendas> list = vendasDao.findAll();
-        for (Vendas venda : list) {
-            System.out.println(venda);
-        }
-    }
-
-    public static void listarVendaPorID() {
-        Scanner sc = new Scanner(System.in);
-        VendasDao vendasDao = DaoFactory.createVendasDao();
-
-        System.out.println("Informe o ID da venda a ser exibida:");
-        int idVendas = sc.nextInt();
-        Vendas venda = vendasDao.findById(idVendas);
-        System.out.println(venda);
-    }
-
-    public static void deletarVenda() {
-        Scanner sc = new Scanner(System.in);
-        VendasDao vendasDao = DaoFactory.createVendasDao();
-
-        System.out.print("Insira o ID da Venda a ser Excluída: ");
-        int idVendas = sc.nextInt();
-        vendasDao.deleteById(idVendas);
-        System.out.println("Venda Excluída!");
-    }
-
-    static void adicionarProduto(){
-        Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
-
-        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-
-        System.out.println("Digite o Nome do Produto:");
-        String nome = sc.nextLine();
-        System.out.println("Digite o Preco do Produto:");
-        Float preco = Float.parseFloat(sc.nextLine());
-        System.out.println("Digite a Validade do Produto (no formato dd/MM/yyyy):");
-        String valiString = sc.nextLine();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date vali = null;
-        try {
-            vali = sdf.parse(valiString);
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("Digite a Unidade de Medida do Produto:");
-        String uni = sc.nextLine();
-        Produto newProduto = new Produto(null,nome,preco,vali,uni);
-        produtoDao.insert(newProduto);
-        System.out.println("Adicionado! Novo id: " + newProduto.getId());
-    }
-
-    static void atualizarProduto(){
-        Scanner sc = new Scanner(System.in);
-        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-
-        System.out.println("Informe o ID do produto que deseja atualizar:");
-        Produto dep2 = produtoDao.findById(sc.nextInt());
-        sc.nextLine();
-        System.out.println("Digite o Nome do Produto:");
-        dep2.setNome(sc.nextLine());
-        System.out.println("Digite o Preco do Produto:");
-        dep2.setPreco(Float.parseFloat(sc.nextLine()));
-        System.out.println("Digite a Validade do Produto:");
-        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            dep2.setVali(formatoData.parse(sc.nextLine()));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Digite a Unidade de Medida do Produto:");
-        dep2.setUni(sc.nextLine());
-        produtoDao.update(dep2);
-        System.out.println("Atualizacao Completa!");
-
-    }
-
-    static void listarProduto(){
-        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-
-        List<Produto> list = produtoDao.findAll();
-        for (Produto d : list) {
-            System.out.println(d);
-        }
-    }
-
-    static void listarIDProduto(){
-        Scanner sc = new Scanner(System.in);
-
-        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-
-        System.out.println("Informe o ID a ser exibido:");
-        Produto dep = produtoDao.findById(sc.nextInt());
-        System.out.println(dep);
-    }
-
-    static void deletarProduto(){
-        Scanner sc = new Scanner(System.in);
-
-        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-
-        System.out.print("Insira o ID do Produto a ser Excluido: ");
-        int id = sc.nextInt();
-        produtoDao.deleteById(id);
-        System.out.println("Produto Excluido!");
-    }
-
-
-
-
-
-        static void adicionarEstoque(){
+    static void adicionarEstoque(){
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
 
@@ -352,9 +187,7 @@ public class Funcoes {
         sc.close();
     }
 
-
-
-//fornecedores
+    /* ---------- FORNECEDOR ---------- */
 
     static void adicionarFornecedor(){
         Scanner sc = new Scanner(System.in);
@@ -405,7 +238,6 @@ public class Funcoes {
         }
     }
 
-
     static void listarIDFornecedor() {
         Scanner sc = new Scanner(System.in);
 
@@ -427,8 +259,157 @@ public class Funcoes {
 
     }
 
+    /* ---------- PRODUTO ---------- */
 
+    static void adicionarProduto(){
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
 
+        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+
+        System.out.println("Digite o Nome do Produto:");
+        String nome = sc.nextLine();
+        System.out.println("Digite o Preco do Produto:");
+        Float preco = Float.parseFloat(sc.nextLine());
+        System.out.println("Digite a Validade do Produto (no formato dd/MM/yyyy):");
+        String valiString = sc.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date vali = null;
+        try {
+            vali = sdf.parse(valiString);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Digite a Unidade de Medida do Produto:");
+        String uni = sc.nextLine();
+        Produto newProduto = new Produto(null,nome,preco,vali,uni);
+        produtoDao.insert(newProduto);
+        System.out.println("Adicionado! Novo id: " + newProduto.getId());
+    }
+
+    static void atualizarProduto(){
+        Scanner sc = new Scanner(System.in);
+        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+
+        System.out.println("Informe o ID do produto que deseja atualizar:");
+        Produto dep2 = produtoDao.findById(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Digite o Nome do Produto:");
+        dep2.setNome(sc.nextLine());
+        System.out.println("Digite o Preco do Produto:");
+        dep2.setPreco(Float.parseFloat(sc.nextLine()));
+        System.out.println("Digite a Validade do Produto:");
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dep2.setVali(formatoData.parse(sc.nextLine()));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Digite a Unidade de Medida do Produto:");
+        dep2.setUni(sc.nextLine());
+        produtoDao.update(dep2);
+        System.out.println("Atualizacao Completa!");
+
+    }
+
+    static void listarProduto(){
+        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+
+        List<Produto> list = produtoDao.findAll();
+        for (Produto d : list) {
+            System.out.println(d);
+        }
+    }
+
+    static void listarIDProduto(){
+        Scanner sc = new Scanner(System.in);
+
+        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+
+        System.out.println("Informe o ID a ser exibido:");
+        Produto dep = produtoDao.findById(sc.nextInt());
+        System.out.println(dep);
+    }
+
+    static void deletarProduto(){
+        Scanner sc = new Scanner(System.in);
+
+        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+
+        System.out.print("Insira o ID do Produto a ser Excluido: ");
+        int id = sc.nextInt();
+        produtoDao.deleteById(id);
+        System.out.println("Produto Excluido!");
+    }
+
+    /* ---------- USUARIO ---------- */
+
+    static void adicionarUsuario(){
+        Scanner sc = new Scanner(System.in);
+
+        UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+
+        System.out.println("Digite a senha do Usuario:");
+        String senha = sc.nextLine();
+        System.out.println("Digite o nome do Usuario:");
+        String nome = sc.nextLine();
+        System.out.println("Digite o cpf do Usuario:");
+        String cpf = sc.nextLine();
+        Usuario newUsuario = new Usuario(null,nome,senha,cpf);
+        usuarioDao.insert(newUsuario);
+        System.out.println("Adicionado! Novo id: " + newUsuario.getIdUsuario());
+    }
+
+    static void atualizarUsuario(){
+        Scanner sc = new Scanner(System.in);
+
+        UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+
+        System.out.println("Informe o ID do usuario que deseja atualizar:");
+        Usuario dep2 = usuarioDao.findById(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Digite a senha do Usuario:");
+        dep2.setSenha(sc.nextLine());
+        System.out.println("Digite o nome do Usuario:");
+        dep2.setNome(sc.nextLine());
+        System.out.println("Digite o cpf do Usuario:");
+        dep2.setCpf(sc.nextLine());
+        usuarioDao.update(dep2);
+        System.out.println("Atualizacao Completa!");
+
+    }
+
+    static void listarUsuario(){
+        UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+
+        List<Usuario> list = usuarioDao.findAll();
+        for (Usuario d : list) {
+            System.out.println(d);
+        }
+    }
+
+    static void listarIDUsuario(){
+        Scanner sc = new Scanner(System.in);
+
+        UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+
+        System.out.println("Informe o ID a ser exibido:");
+        Usuario dep = usuarioDao.findById(sc.nextInt());
+        System.out.println(dep);
+    }
+
+    static void deletarUsuario(){
+        Scanner sc = new Scanner(System.in);
+
+        UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+
+        System.out.print("Insira o ID do Usuario a ser Excluido: ");
+        int id = sc.nextInt();
+        usuarioDao.deleteById(id);
+        System.out.println("Produto Excluido!");
+    }
+
+    /* ---------- VENDA ---------- */
 
 }
 

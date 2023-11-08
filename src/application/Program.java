@@ -225,7 +225,7 @@ public class Program extends Funcoes {
 
                     int usuarioOption;
                     do {
-                        System.out.println("Selecione a opção de Usuario:\n[1] - Adcionar Usuario\n[2] - Atualizar Usuario\n[3] - Listar PUsuario\n[4] - Listar por ID\n[5] - Deletar Usuario\n[0] - Voltar\n->");
+                        System.out.println("Selecione a opção de Usuario:\n[1] - Adcionar Usuario\n[2] - Atualizar Usuario\n[3] - Listar Usuario\n[4] - Listar por ID\n[5] - Deletar Usuario\n[0] - Voltar\n->");
                         usuarioOption = scanner.nextInt();
 
                         switch (usuarioOption) {
@@ -233,31 +233,31 @@ public class Program extends Funcoes {
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Adcionar Usuario    |\n");
                                 System.out.println("-----------------------------\n");
-                                // adicionarUsuario();
+                                adicionarUsuario();
                                 break;
                             case 2:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|     Atualizar Usuario     |\n");
                                 System.out.println("-----------------------------\n");
-                                // atualizarUsuario();
+                                atualizarUsuario();
                                 break;
                             case 3:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|      Listar Usuario       |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarUsuario();
+                                listarUsuario();
                                 break;
                             case 4:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Listar por ID       |\n");
                                 System.out.println("-----------------------------\n");
-                                // listarIDUsuario();
+                                listarIDUsuario();
                                 break;
                             case 5:
                                 System.out.println("-----------------------------\n");
                                 System.out.println("|       Deletar Usuario     |\n");
                                 System.out.println("-----------------------------\n");
-                                // deletarUsuario();
+                                deletarUsuario();
                                 break;
                             default:
                                 System.out.println("Opção inválida. Tente novamente.");
