@@ -11,7 +11,7 @@ public class Vendas implements Serializable {
     private String observacao;
     private Date dataSaida;
 
-    public Vendas(Vendas obj, Object object, Object object2, int i) {
+    public Vendas() {
     }
 
     public Vendas(Integer idVendas, String observacao, Date dataSaida) {

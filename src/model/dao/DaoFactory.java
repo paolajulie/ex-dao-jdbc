@@ -6,6 +6,7 @@ import model.dao.impl.EstoqueDaoJDBC;
 import model.dao.impl.FornecedorDaoJDBC;
 import model.dao.impl.ProdutoDaoJDBC;
 import model.dao.impl.UsuarioDaoJDBC;
+import model.dao.impl.VendasDaoJDBC;
 
 public class DaoFactory {
 
@@ -29,5 +30,6 @@ public class DaoFactory {
         return new UsuarioDaoJDBC(DB.getConnection());
     }
 
+    public static VendasDao createVendasDao() { return new VendasDaoJDBC(DB.getConnection()); }
 
 }

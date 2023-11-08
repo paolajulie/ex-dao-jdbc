@@ -12,7 +12,7 @@ import model.entities.Estoque;
 
 public class EstoqueDaoJDBC implements EstoqueDao {
 
-    private Connection conn;
+    private final Connection conn;
 
     public EstoqueDaoJDBC(Connection conn) {
         this.conn = conn;

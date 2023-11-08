@@ -7,7 +7,7 @@ public interface VendasDao {
 
     void insert(Vendas obj);
     void update(Vendas obj);
-    void deleteById(Integer id);
-    Vendas findById(Integer id);
+    void deleteById(Integer idVendas);
+    Vendas findById(Integer idVendas);
     List<Vendas> findAll();
 }
