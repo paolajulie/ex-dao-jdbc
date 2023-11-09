@@ -8,7 +8,6 @@ public class TradeOn {
     private JTextField txtNome;
     private JTextField txtQuantidade;
     private JButton salvarButton;
-    private JTable table1;
     private JButton apagarButton;
     private JButton atualizarButton;
     private JButton procurarButton;
