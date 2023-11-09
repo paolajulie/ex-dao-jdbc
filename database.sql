@@ -8,6 +8,7 @@ CREATE TABLE Fornecedor (
     cnpj VARCHAR(14),
     localizacao VARCHAR(200),
     contato VARCHAR(200)
+);
 
 CREATE TABLE Produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
