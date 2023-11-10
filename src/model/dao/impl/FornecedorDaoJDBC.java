@@ -19,7 +19,7 @@ public class FornecedorDaoJDBC implements FornecedorDao {
     }
 
     @Override
-    public void insert(Fornecedor obj) {
+    public Fornecedor insert(Fornecedor obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -51,6 +51,7 @@ public class FornecedorDaoJDBC implements FornecedorDao {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return obj;
     }
 
 

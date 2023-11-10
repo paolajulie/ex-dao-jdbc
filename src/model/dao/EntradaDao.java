@@ -6,7 +6,7 @@ import model.entities.Entrada;
 
 public interface EntradaDao {
 
-    void insertEntrada(Entrada obj);
+    Entrada insertEntrada(Entrada obj);
     void update(Entrada obj);
     void deleteById(Integer idEntrada);
     Entrada findById(Integer idEntrada);

@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="Fornecedor" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
-      <xy x="20" y="20" width="664" height="542"/>
+      <xy x="20" y="20" width="664" height="569"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -16,6 +16,7 @@
           </grid>
         </constraints>
         <properties>
+          <horizontalTextPosition value="0"/>
           <text value="Adicionar Fornecedor"/>
         </properties>
       </component>

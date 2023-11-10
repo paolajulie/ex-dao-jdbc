@@ -5,7 +5,7 @@ import model.entities.Fornecedor;
 
 public interface FornecedorDao {
 
-    void insert(Fornecedor obj);
+    Fornecedor insert(Fornecedor obj);
     void update(Fornecedor obj);
     void deleteById(Integer idFornecedor);
     Fornecedor findById(Integer idFornecedor);

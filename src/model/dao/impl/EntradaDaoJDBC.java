@@ -19,7 +19,7 @@ public class EntradaDaoJDBC implements EntradaDao {
     }
 
     @Override
-    public void insertEntrada(Entrada obj) {
+    public Entrada insertEntrada(Entrada obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -49,6 +49,7 @@ public class EntradaDaoJDBC implements EntradaDao {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return obj;
     }
 
 
@@ -59,7 +60,7 @@ public class EntradaDaoJDBC implements EntradaDao {
             st = conn.prepareStatement(
                     "UPDATE entrada " +
                             "SET Observacao = ?, DataEntrada = ?" +
-                            "WHERE Id = ?");
+                            "WHERE IdEntrada = ?");
 
             st.setString(1, obj.getObservacao());
             java.util.Date utilDate = obj.getDataEntrada();
