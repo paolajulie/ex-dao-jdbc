@@ -53,7 +53,6 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
     }
 
-
     @Override
     public void update(Produto obj) {
         PreparedStatement st = null;
