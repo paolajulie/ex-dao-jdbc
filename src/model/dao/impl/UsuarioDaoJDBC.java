@@ -25,6 +25,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
         try {
             st = conn.prepareStatement(
+<<<<<<< HEAD
                     "INSERT INTO usuario (idUsuario, senha, nome, cpf) VALUES (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
@@ -33,6 +34,15 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             st.setString(2, obj.getSenha());
             st.setString(3, obj.getNome());
             st.setString(4, obj.getCpf());
+=======
+                    "INSERT INTO Usuario (senha, nome, cpf) VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+
+            st.setString(1, obj.getSenha());
+            st.setString(2, obj.getNome());
+            st.setString(3, obj.getCpf());
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
 
             int rowsAffected = st.executeUpdate();
 
@@ -40,10 +50,17 @@ public class UsuarioDaoJDBC implements UsuarioDao {
                 rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
+<<<<<<< HEAD
                     obj.setId(id);
                 }
             } else {
                 throw new DbException("Erro inesperado! Nenhuma linha afetada!");
+=======
+                    obj.setIdUsuario(id);
+                }
+            } else {
+                throw new DbException("Unexpected error! No rows affected!");
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -58,6 +75,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
+<<<<<<< HEAD
                     "UPDATE usuario " +
                             "SET idUsuario = ?, senha = ?, nome = ?, cpf = ? " +
                             "WHERE id = ?");
@@ -67,6 +85,16 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             st.setString(3, obj.getNome());
             st.setString(4, obj.getCpf());
             st.setInt(5, obj.getId());
+=======
+                    "UPDATE Usuario " +
+                            "SET Senha = ?, Nome = ?, Cpf = ? " +
+                            "WHERE IdUsuario = ?");
+
+            st.setString(1, obj.getSenha());
+            st.setString(2, obj.getNome());
+            st.setString(3, obj.getCpf());
+            st.setInt(4, obj.getIdUsuario());
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
 
             st.executeUpdate();
         }
@@ -84,15 +112,23 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
+<<<<<<< HEAD
                     "SELECT * FROM usuario ORDER BY id");
+=======
+                    "SELECT * FROM Usuario ORDER BY IdUsuario");
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
             rs = st.executeQuery();
 
             List<Usuario> list = new ArrayList<>();
 
             while (rs.next()) {
                 Usuario obj = new Usuario();
+<<<<<<< HEAD
                 obj.setId(rs.getInt("id"));
                 obj.setIdUsuario(rs.getString("idUsuario"));
+=======
+                obj.setIdUsuario(rs.getInt("IdUsuario"));
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
                 obj.setSenha(rs.getString("senha"));
                 obj.setNome(rs.getString("nome"));
                 obj.setCpf(rs.getString("cpf"));
@@ -116,13 +152,21 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
+<<<<<<< HEAD
                     "SELECT * FROM usuario WHERE id = ?");
+=======
+                    "SELECT * FROM Usuario WHERE IdUsuario = ?");
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
                 Usuario obj = new Usuario();
+<<<<<<< HEAD
                 obj.setId(rs.getInt("id"));
                 obj.setIdUsuario(rs.getString("idUsuario"));
+=======
+                obj.setIdUsuario(rs.getInt("IdUsuario"));
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
                 obj.setSenha(rs.getString("senha"));
                 obj.setNome(rs.getString("nome"));
                 obj.setCpf(rs.getString("cpf"));
@@ -144,6 +188,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
+<<<<<<< HEAD
                     "DELETE FROM usuario WHERE id = ?");
 
             st.setInt(1, id);
@@ -306,6 +351,9 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         try {
             st = conn.prepareStatement(
                     "DELETE FROM usuario WHERE id = ?");
+=======
+                    "DELETE FROM Usuario WHERE IdUsuario = ?");
+>>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0
 
             st.setInt(1, id);
 

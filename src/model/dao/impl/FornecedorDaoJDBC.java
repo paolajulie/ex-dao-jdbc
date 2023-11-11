@@ -7,32 +7,32 @@ import java.util.List;
 import db.DB;
 import db.DbException;
 import db.DbIntegrityException;
-import model.dao.ProdutoDao;
-import model.entities.Produto;
+import model.entities.Fornecedor;
+import model.dao.FornecedorDao;
 
-public class ProdutoDaoJDBC implements ProdutoDao {
+public class FornecedorDaoJDBC implements FornecedorDao {
 
     private Connection conn;
 
-    public ProdutoDaoJDBC(Connection conn) {
+    public FornecedorDaoJDBC(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public void insert(Produto obj) {
+    public Fornecedor insert(Fornecedor obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO produto (nome, preco, vali, uni) VALUES (?, ?, ?, ?)",
+                    "INSERT INTO fornecedor (nome, cnpj, localizacao, contato) VALUES (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
 
             st.setString(1, obj.getNome());
-            st.setFloat(2, obj.getPreco());
-            st.setDate(3, new java.sql.Date(obj.getVali().getTime()));
-            st.setString(4, obj.getUni());
+            st.setString(2, obj.getCnpj());
+            st.setString(3, obj.getLocalizacao());
+            st.setString(4, obj.getContato());
 
             int rowsAffected = st.executeUpdate();
 
@@ -40,7 +40,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
                 rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    obj.setId(id);
+                    obj.setIdFornecedor(id);
                 }
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
@@ -51,24 +51,24 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return obj;
     }
 
+
     @Override
-    public void update(Produto obj) {
+    public void update(Fornecedor obj) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "UPDATE produto " +
-                            "SET Nome = ?, Preco = ?, Vali = ?, Uni = ? " +
-                            "WHERE Id = ?");
+                    "UPDATE fornecedor " +
+                            "SET nome = ?, cnpj = ?, localizacao = ?, contato = ? " +
+                            "WHERE idFornecedor = ?");
 
             st.setString(1, obj.getNome());
-            st.setFloat(2, obj.getPreco());
-            java.util.Date utilDate = obj.getVali();
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            st.setDate(3, sqlDate);
-            st.setString(4, obj.getUni());
-            st.setInt(5, obj.getId());
+            st.setString(2, obj.getCnpj());
+            st.setString(3, obj.getLocalizacao());
+            st.setString(4, obj.getContato());
+            st.setInt(5, obj.getIdFornecedor());
 
 
             st.executeUpdate();
@@ -82,23 +82,23 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public List<Produto> findAll() {
+    public List<Fornecedor> findAll() {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT * FROM produto ORDER BY Id");
+                    "SELECT * FROM fornecedor ORDER BY idFornecedor");
             rs = st.executeQuery();
 
-            List<Produto> list = new ArrayList<>();
+            List<Fornecedor> list = new ArrayList<>();
 
             while (rs.next()) {
-                Produto obj = new Produto();
-                obj.setId(rs.getInt("Id"));
+                Fornecedor obj = new Fornecedor();
+                obj.setIdFornecedor(rs.getInt("idFornecedor"));
                 obj.setNome(rs.getString("nome"));
-                obj.setPreco(rs.getFloat("preco"));
-                obj.setVali(rs.getDate("vali"));
-                obj.setUni(rs.getString("uni"));
+                obj.setCnpj(rs.getString("cnpj"));
+                obj.setLocalizacao(rs.getString("localizacao"));
+                obj.setContato(rs.getString("contato"));
 
                 list.add(obj);
             }
@@ -114,21 +114,21 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public Produto findById(Integer id) {
+    public Fornecedor findById(Integer id) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT * FROM produto WHERE Id = ?");
+                    "SELECT * FROM fornecedor WHERE IdFornecedor = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
-                Produto obj = new Produto();
-                obj.setId(rs.getInt("Id"));
+               Fornecedor obj = new Fornecedor();
+                obj.setIdFornecedor(rs.getInt("IdFornecedor"));
                 obj.setNome(rs.getString("nome"));
-                obj.setPreco(rs.getFloat("preco"));
-                obj.setVali(rs.getDate("vali"));
-                obj.setUni(rs.getString("uni"));
+                obj.setCnpj(rs.getString("cnpj"));
+                obj.setLocalizacao(rs.getString("localizacao"));
+                obj.setContato(rs.getString("contato"));
                 return obj;
             }
             return null;
@@ -147,7 +147,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "DELETE FROM produto WHERE Id = ?");
+                    "DELETE FROM fornecedor WHERE IdFornecedor = ?");
 
             st.setInt(1, id);
 
@@ -161,3 +161,4 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
     }
 }
+
