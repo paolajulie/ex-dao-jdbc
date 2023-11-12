@@ -17,7 +17,8 @@ CREATE TABLE Produto (
     vali DATE NOT NULL,
     uni VARCHAR(10) NOT NULL,
     idForn INT,
-    FOREIGN KEY (idForn) REFERENCES Fornecedor(idFornecedor)
+    FOREIGN KEY (idForn) REFERENCES Fornecedor(idFornecedor),
+    FOREIGN KEY (idEstoque) REFERENCES Estoque(idEstoque)
 );
 
 CREATE TABLE Estoque (
@@ -28,6 +29,13 @@ CREATE TABLE Estoque (
     min INT NOT NULL,
     max INT NOT NULL,
     StatusEstoque BOOLEAN NOT NULL
+);
+
+CREATE TABLE Usuario (
+    idUsuario INT AUTO_INCREMENT PRIMARY KEY,
+    senha VARCHAR(16),
+    nome VARCHAR(80),
+    cpf VARCHAR(11)
 );
 
 CREATE TABLE Entrada (
@@ -44,13 +52,6 @@ CREATE TABLE Vendas (
     dataEntrada DATE,
     idUsuario INT,
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
-);
-
-CREATE TABLE Usuario (
-    idUsuario INT AUTO_INCREMENT PRIMARY KEY,
-    senha VARCHAR(16),
-    nome VARCHAR(80),
-    cpf VARCHAR(11)
 );
 
 CREATE TABLE Itens_Venda (
