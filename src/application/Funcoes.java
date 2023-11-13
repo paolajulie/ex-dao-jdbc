@@ -89,11 +89,15 @@ public class Funcoes {
     }
 
 
+<<<<<<< Updated upstream
 
 
 
 
     static void adicionarProduto(){
+=======
+    static void adicionarEstoque() {
+>>>>>>> Stashed changes
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
 
@@ -182,29 +186,35 @@ public class Funcoes {
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
 
-        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+        try {
+            EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
 
-        System.out.println("-----------------------------\n");
-        System.out.println("|    Adicionar Estoque      |\n");
-        System.out.println("-----------------------------\n");
-        System.out.println("Digite o Custo do Estoque:");
-        Float custo = Float.parseFloat(sc.nextLine());
-        System.out.println("Digite a Descrição do Estoque:");
-        String descricao = sc.nextLine();
-        System.out.println("Digite a Quantidade do Estoque:");
-        int quantidade = Integer.parseInt(sc.nextLine());
-        System.out.println("Digite o Mínimo do Estoque:");
-        int min = Integer.parseInt(sc.nextLine());
-        System.out.println("Digite o Máximo do Estoque:");
-        int max = Integer.parseInt(sc.nextLine());
-        System.out.println("Digite o Status do Estoque (true/false):");
-        boolean statusEstoque = Boolean.parseBoolean(sc.nextLine());
+            System.out.println("-----------------------------\n");
+            System.out.println("|    Adicionar Estoque      |\n");
+            System.out.println("-----------------------------\n");
+            System.out.println("Digite o Custo do Estoque:");
+            Float custo = Float.parseFloat(sc.nextLine());
+            System.out.println("Digite a Descrição do Estoque:");
+            String descricao = sc.nextLine();
+            System.out.println("Digite a Quantidade do Estoque:");
+            int quantidade = Integer.parseInt(sc.nextLine());
+            System.out.println("Digite o Mínimo do Estoque:");
+            int min = Integer.parseInt(sc.nextLine());
+            System.out.println("Digite o Máximo do Estoque:");
+            int max = Integer.parseInt(sc.nextLine());
+            System.out.println("Digite o Status do Estoque (true/false):");
+            boolean statusEstoque = Boolean.parseBoolean(sc.nextLine());
 
-        Estoque newEstoque = new Estoque(null, custo, descricao, quantidade, min, max, statusEstoque);
-        estoqueDao.insert(newEstoque);
-        System.out.println("Adicionado! Novo idEstoque: " + newEstoque.getIdEstoque());
-        sc.close();
+            Estoque newEstoque = new Estoque(null, custo, descricao, quantidade, min, max, statusEstoque);
+            estoqueDao.insert(newEstoque);
+            System.out.println("Adicionado! Novo idEstoque: " + newEstoque.getIdEstoque());
+        } catch (NumberFormatException e) {
+            System.out.println("Erro ao converter valor. Certifique-se de inserir um valor válido.");
+        } finally {
+            sc.close();
+        }
     }
+
 
     static void atualizarEstoque(){
         Scanner sc = new Scanner(System.in);

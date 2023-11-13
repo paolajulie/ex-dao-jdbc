@@ -5,7 +5,7 @@ import model.entities.Estoque;
 
 public interface EstoqueDao {
 
-    void insert(Estoque obj);
+    Estoque insert(Estoque obj);
     void update(Estoque obj);
     void deleteById(Integer idEstoque);
     Estoque findById(Integer idEstoque);

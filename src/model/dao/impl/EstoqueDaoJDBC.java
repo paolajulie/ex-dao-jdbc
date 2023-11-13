@@ -19,7 +19,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
     }
 
     @Override
-    public void insert(Estoque obj) {
+    public Estoque insert(Estoque obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -32,8 +32,10 @@ public class EstoqueDaoJDBC implements EstoqueDao {
             st.setFloat(1, obj.getCusto());
             st.setString(2, obj.getDescricao());
             st.setInt(3, obj.getQuantidade());
-            st.setInt(4, obj.getMin());
-            st.setInt(5, obj.getMax());
+            st.setInt(4, (obj.getMin() != null) ? obj.getMin() : 0);
+
+            st.setObject(5, (obj.getMax() != null) ? obj.getMax() : 0);
+
             st.setBoolean(6, obj.getStatusEstoque());
 
             int rowsAffected = st.executeUpdate();
@@ -53,6 +55,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return obj;
     }
 
     @Override
