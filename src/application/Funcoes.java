@@ -93,6 +93,149 @@ public class Funcoes {
 
 
 
+<<<<<<< Updated upstream
+=======
+        Estoque newEstoque = new Estoque(null, custo, descricao, quantidade, min, max, statusEstoque);
+        estoqueDao.insert(newEstoque);
+        System.out.println("Adicionado! Novo idEstoque: " + newEstoque.getIdEstoque());
+    }
+
+    static void atualizarEstoque(){
+        Scanner sc = new Scanner(System.in);
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|    Atualizar Estoque      |\n");
+        System.out.println("-----------------------------\n");
+        System.out.println("Informe o ID do estoque que deseja atualizar:");
+        Estoque estoque = estoqueDao.findById(sc.nextInt());
+        System.out.println("Digite o Custo do Estoque:");
+        estoque.setCusto(Float.parseFloat(sc.nextLine()));
+        System.out.println("Digite a Descrição do Estoque:");
+        estoque.setDescricao(sc.nextLine());
+        System.out.println("Digite a Quantidade do Estoque:");
+        estoque.setQuantidade(Integer.parseInt(sc.nextLine()));
+        System.out.println("Digite o Mínimo do Estoque:");
+        estoque.setMin(Integer.parseInt(sc.nextLine()));
+        System.out.println("Digite o Máximo do Estoque:");
+        estoque.setMax(Integer.parseInt(sc.nextLine()));
+        System.out.println("Digite o Status do Estoque (true/false):");
+        estoque.setStatusEstoque(Boolean.parseBoolean(sc.nextLine()));
+        estoqueDao.update(estoque);
+        System.out.println("Atualização Completa!");
+        sc.close();
+    }
+
+    static void listarEstoque(){
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|        Listar Estoque      |\n");
+        System.out.println("-----------------------------\n");
+        List<Estoque> list = estoqueDao.findAll();
+        for (Estoque estoque : list) {
+            System.out.println(estoque);
+        }
+    }
+
+    static void listarIDEstoque(){
+        Scanner sc = new Scanner(System.in);
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.println("-----------------------------\n");
+        System.out.println("|   Listar Estoque por ID    |\n");
+        System.out.println("-----------------------------\n");
+        System.out.println("Informe o ID do estoque a ser exibido:");
+        Estoque estoque = estoqueDao.findById(sc.nextInt());
+        System.out.println(estoque);
+        sc.close();
+    }
+
+    static void deletarEstoque(){
+        Scanner sc = new Scanner(System.in);
+        EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
+
+        System.out.print("Insira o ID do Estoque a ser Excluído: ");
+        int idEstoque = sc.nextInt();
+        sc.nextLine();
+        estoqueDao.deleteById(idEstoque);
+        System.out.println("Estoque Excluído!");
+        sc.close();
+    }
+
+    /* ---------- FORNECEDOR ---------- */
+
+    static void adicionarFornecedor(){
+        Scanner sc = new Scanner(System.in);
+
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
+
+        System.out.println("Digite o nome:");
+        String nome = sc.nextLine();
+        System.out.println("Digite o Cnpj:");
+        String cnpj = sc.nextLine();
+        System.out.println("Digite a localizacao:");
+        String localizacao = sc.nextLine();
+        System.out.println("Digite o contato:");
+        String contato = sc.nextLine();
+
+        Fornecedor newFornecedor = new Fornecedor(null,nome,cnpj ,localizacao,contato);
+        fornecedorDao.insert(newFornecedor);
+        System.out.println("Adicionado! Novo id: " + newFornecedor.getIdFornecedor());
+    }
+
+    static void atualizarFornecedor(){
+        Scanner sc = new Scanner(System.in);
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
+
+        System.out.println("Informe o ID do Fornecedor que deseja atualizar:");
+        Fornecedor dep2 = fornecedorDao.findById(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Digite o Nome do Fornecedor:");
+        dep2.setNome(sc.nextLine());
+        System.out.println("Digite o Cnpj do Fornecedor:");
+        dep2.setCnpj(sc.nextLine());
+        System.out.println("Digite a Localização do Fornecedor:");
+        dep2.setLocalizacao(sc.nextLine());
+        System.out.println("Digite o Contato do Fornecedor:");
+        dep2.setContato(sc.nextLine());
+        fornecedorDao.update(dep2);
+        System.out.println("Atualizacao Completa!");
+
+    }
+
+    static void listarFornecedor() {
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
+
+        List<Fornecedor> list = fornecedorDao.findAll();
+        for (Fornecedor fornecedor : list) {
+            System.out.println(fornecedor);
+        }
+    }
+
+    static void listarIDFornecedor() {
+        Scanner sc = new Scanner(System.in);
+
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
+
+        System.out.println("Informe o ID a ser exibido:");
+        Fornecedor fornecedor = fornecedorDao.findById(sc.nextInt());
+        System.out.println(fornecedor);
+    }
+
+    static void deletarFornecedor() {
+        Scanner sc = new Scanner(System.in);
+        FornecedorDao fornecedorDao = DaoFactory.createFornecedorDao();
+
+        System.out.print("Insira o ID do Fornecedor a ser Excluído: ");
+        int idFornecedor = sc.nextInt();
+        fornecedorDao.deleteById(idFornecedor);
+        System.out.println("Fornecedor Excluído!");
+
+    }
+
+    /* ---------- PRODUTO ---------- */
+>>>>>>> Stashed changes
 
     static void adicionarProduto(){
 =======

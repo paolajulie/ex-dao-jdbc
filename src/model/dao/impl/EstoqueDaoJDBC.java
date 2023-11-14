@@ -32,9 +32,18 @@ public class EstoqueDaoJDBC implements EstoqueDao {
             st.setFloat(1, obj.getCusto());
             st.setString(2, obj.getDescricao());
             st.setInt(3, obj.getQuantidade());
+<<<<<<< Updated upstream
             st.setInt(4, (obj.getMin() != null) ? obj.getMin() : 0);
 
             st.setObject(5, (obj.getMax() != null) ? obj.getMax() : 0);
+=======
+
+            Integer min = obj.getMin();
+            st.setInt(4, (min != null) ? min : 1);
+
+            Integer max = obj.getMax();
+            st.setInt(5, (max != null) ? max : 1);
+>>>>>>> Stashed changes
 
             st.setBoolean(6, obj.getStatusEstoque());
 
@@ -47,7 +56,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
                     obj.setIdEstoque(idEstoque);
                 }
             } else {
-                throw new DbException("Unexpected error! No rows affected!");
+                throw new DbException("Erro inesperado! Nenhuma linha afetada!");
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
