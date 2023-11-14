@@ -90,6 +90,11 @@ public class Funcoes {
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    public static void adicionarEstoque() {
+        Scanner sc = new Scanner(System.in);
+>>>>>>> Stashed changes
 
 
 
@@ -100,7 +105,7 @@ public class Funcoes {
         System.out.println("Adicionado! Novo idEstoque: " + newEstoque.getIdEstoque());
     }
 
-    static void atualizarEstoque(){
+    public static void atualizarEstoque() {
         Scanner sc = new Scanner(System.in);
         EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
 
@@ -108,22 +113,31 @@ public class Funcoes {
         System.out.println("|    Atualizar Estoque      |\n");
         System.out.println("-----------------------------\n");
         System.out.println("Informe o ID do estoque que deseja atualizar:");
-        Estoque estoque = estoqueDao.findById(sc.nextInt());
+        int idEstoque = Integer.parseInt(sc.nextLine());
+        Estoque estoque = estoqueDao.findById(idEstoque);
+
         System.out.println("Digite o Custo do Estoque:");
-        estoque.setCusto(Float.parseFloat(sc.nextLine()));
+        float custo = Float.parseFloat(sc.nextLine());
         System.out.println("Digite a Descrição do Estoque:");
-        estoque.setDescricao(sc.nextLine());
+        String descricao = sc.nextLine();
         System.out.println("Digite a Quantidade do Estoque:");
-        estoque.setQuantidade(Integer.parseInt(sc.nextLine()));
+        int quantidade = Integer.parseInt(sc.nextLine());
         System.out.println("Digite o Mínimo do Estoque:");
-        estoque.setMin(Integer.parseInt(sc.nextLine()));
+        int min = Integer.parseInt(sc.nextLine());
         System.out.println("Digite o Máximo do Estoque:");
-        estoque.setMax(Integer.parseInt(sc.nextLine()));
+        int max = Integer.parseInt(sc.nextLine());
         System.out.println("Digite o Status do Estoque (true/false):");
-        estoque.setStatusEstoque(Boolean.parseBoolean(sc.nextLine()));
+        boolean statusEstoque = Boolean.parseBoolean(sc.nextLine());
+
+        estoque.setCusto(custo);
+        estoque.setDescricao(descricao);
+        estoque.setQtd(quantidade);
+        estoque.setMin(min);
+        estoque.setMax(max);
+        estoque.setStatusEstoque(statusEstoque);
+
         estoqueDao.update(estoque);
         System.out.println("Atualização Completa!");
-        sc.close();
     }
 
     static void listarEstoque(){
@@ -148,7 +162,6 @@ public class Funcoes {
         System.out.println("Informe o ID do estoque a ser exibido:");
         Estoque estoque = estoqueDao.findById(sc.nextInt());
         System.out.println(estoque);
-        sc.close();
     }
 
     static void deletarEstoque(){
@@ -160,7 +173,6 @@ public class Funcoes {
         sc.nextLine();
         estoqueDao.deleteById(idEstoque);
         System.out.println("Estoque Excluído!");
-        sc.close();
     }
 
     /* ---------- FORNECEDOR ---------- */

@@ -25,12 +25,13 @@ public class EstoqueDaoJDBC implements EstoqueDao {
 
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO Estoque (custo, descricao, quantidade, min, max, StatusEstoque) VALUES (?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO Estoque (custo, descricao, quantidade, min, max, statusEstoque) VALUES (?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
 
             st.setFloat(1, obj.getCusto());
             st.setString(2, obj.getDescricao());
+<<<<<<< Updated upstream
             st.setInt(3, obj.getQuantidade());
 <<<<<<< Updated upstream
             st.setInt(4, (obj.getMin() != null) ? obj.getMin() : 0);
@@ -46,6 +47,14 @@ public class EstoqueDaoJDBC implements EstoqueDao {
 >>>>>>> Stashed changes
 
             st.setBoolean(6, obj.getStatusEstoque());
+=======
+            st.setInt(3, (obj.getQtd() != null) ? obj.getQtd().intValue() : 1);
+            Integer min = obj.getMin();
+            st.setInt(4, (min != null) ? min : 1);
+            Integer max = obj.getMax();
+            st.setInt(5, (max != null) ? max : 1);
+            st.setBoolean(6, (obj.getStatusEstoque() != null) ? obj.getStatusEstoque().booleanValue() : true);
+>>>>>>> Stashed changes
 
             int rowsAffected = st.executeUpdate();
 
@@ -78,7 +87,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
 
             st.setFloat(1, obj.getCusto());
             st.setString(2, obj.getDescricao());
-            st.setInt(3, obj.getQuantidade());
+            st.setInt(3, obj.getQtd());
             st.setInt(4, obj.getMin());
             st.setInt(5, obj.getMax());
             st.setBoolean(6, obj.getStatusEstoque());
@@ -110,7 +119,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
                 obj.setIdEstoque(rs.getInt("idEstoque"));
                 obj.setCusto(rs.getFloat("custo"));
                 obj.setDescricao(rs.getString("descricao"));
-                obj.setQuantidade(rs.getInt("quantidade"));
+                obj.setQtd(rs.getInt("quantidade"));
                 obj.setMin(rs.getInt("min"));
                 obj.setMax(rs.getInt("max"));
                 obj.setStatusEstoque(rs.getBoolean("StatusEstoque"));
@@ -142,7 +151,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
                 obj.setIdEstoque(rs.getInt("idEstoque"));
                 obj.setCusto(rs.getFloat("custo"));
                 obj.setDescricao(rs.getString("descricao"));
-                obj.setQuantidade(rs.getInt("quantidade"));
+                obj.setQtd(rs.getInt("quantidade"));
                 obj.setMin(rs.getInt("min"));
                 obj.setMax(rs.getInt("max"));
                 obj.setStatusEstoque(rs.getBoolean("StatusEstoque"));
