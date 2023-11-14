@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
@@ -125,3 +126,10 @@ public class EstoqueTela {
         });
     }
 }
+
+
+
+public class EstoqueTela {
+    public JPanel Estoque;
+}
+

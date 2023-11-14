@@ -20,6 +20,19 @@
           <text value="Adicionar Fornecedor"/>
         </properties>
       </component>
+
+      <component id="2b8ad" class="javax.swing.JButton" binding="listByIdButton">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="40"/>
+            <preferred-size width="200" height="40"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Listar por ID"/>
+        </properties>
+      </component>
+
       <component id="b67d9" class="javax.swing.JButton" binding="deleteButton">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
@@ -28,7 +41,9 @@
           </grid>
         </constraints>
         <properties>
+
           <horizontalTextPosition value="0"/>
+
           <text value="Deletar Fornecedor"/>
         </properties>
       </component>
@@ -40,7 +55,9 @@
           </grid>
         </constraints>
         <properties>
+
           <horizontalTextPosition value="0"/>
+
           <text value="Atualizar Fornecedor"/>
         </properties>
       </component>
@@ -52,7 +69,9 @@
           </grid>
         </constraints>
         <properties>
+
           <horizontalTextPosition value="0"/>
+
           <text value="Listar Fornecedores"/>
         </properties>
       </component>
@@ -108,6 +127,7 @@
         <children>
           <component id="67fb6" class="javax.swing.JTextArea" binding="textArea">
             <constraints/>
+
             <properties>
               <text value=""/>
             </properties>
@@ -126,6 +146,12 @@
           <text value="Listar por ID"/>
         </properties>
       </component>
+
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+
     </children>
   </grid>
 </form>
