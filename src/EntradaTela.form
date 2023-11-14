@@ -60,18 +60,6 @@
           <text value="Listar por ID"/>
         </properties>
       </component>
-      <component id="9555" class="javax.swing.JButton" binding="deleteButton">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="200" height="40"/>
-            <preferred-size width="200" height="40"/>
-          </grid>
-        </constraints>
-        <properties>
-          <horizontalTextPosition value="0"/>
-          <text value="Deletar Entrada"/>
-        </properties>
-      </component>
       <component id="82fa7" class="javax.swing.JButton" binding="updateButton">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
@@ -124,6 +112,18 @@
           </component>
         </children>
       </scrollpane>
+      <component id="9555" class="javax.swing.JButton" binding="deleteButton">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="40"/>
+            <preferred-size width="200" height="40"/>
+          </grid>
+        </constraints>
+        <properties>
+          <horizontalTextPosition value="0"/>
+          <text value="Deletar Entrada"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

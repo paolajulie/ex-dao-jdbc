@@ -6,7 +6,7 @@ import model.entities.Produto;
 
 public interface ProdutoDao {
 
-    void insert(Produto obj);
+    Produto insert(Produto obj);
     void update(Produto obj);
     void deleteById(Integer id);
     Produto findById(Integer id);

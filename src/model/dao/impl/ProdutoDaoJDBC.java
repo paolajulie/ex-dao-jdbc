@@ -19,7 +19,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public void insert(Produto obj) {
+    public Produto insert(Produto obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -51,6 +51,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return obj;
     }
 
     @Override

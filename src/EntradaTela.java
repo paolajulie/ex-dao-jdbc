@@ -125,6 +125,7 @@ public class EntradaTela {
             }
         });
         this.entradaDao = DaoFactory.createEntradaDao();
+
     }
 
     public static void main(String[] args) {
