@@ -10,13 +10,8 @@ import model.entities.Entrada;
 import model.entities.Estoque;
 import model.entities.Usuario;
 import model.dao.FornecedorDao;
-import model.dao.UsuarioDao;
 import model.dao.VendasDao;
-import model.entities.Produto;
-import model.entities.Entrada;
-import model.entities.Estoque;
 import model.entities.Fornecedor;
-import model.entities.Usuario;
 import model.entities.Vendas;
 import java.text.ParseException;
 import java.util.Date;
@@ -192,92 +187,6 @@ public class Funcoes {
         System.out.println("Estoque Excluído!");
 
     }
-<<<<<<< HEAD
-}
-//usuario
-static void adicionarUsuario() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-
-    System.out.println("Digite o Nome do Usuário:");
-    String nome = sc.nextLine();
-    System.out.println("Digite o ID do Usuário:");
-    int id = sc.nextInt();
-    sc.nextLine(); // Limpar a quebra de linha
-    System.out.println("Digite a Senha do Usuário:");
-    String senha = sc.nextLine();
-    System.out.println("Digite o CPF do Usuário:");
-    String cpf = sc.nextLine();
-
-    Usuario newUsuario = new Usuario(id, senha, nome, cpf);
-    usuarioDao.insert(newUsuario);
-    System.out.println("Usuário Adicionado! Novo ID: " + newUsuario.getId());
-}
-
-static void atualizarUsuario() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-
-    System.out.println("Informe o ID do usuário que deseja atualizar:");
-    int userId = sc.nextInt();
-    Usuario usuario = usuarioDao.findById(userId);
-    sc.nextLine(); // Limpar a quebra de linha
-
-    if (usuario != null) {
-        System.out.println("Digite o Novo Nome do Usuário:");
-        usuario.setNome(sc.nextLine());
-        System.println("Digite a Nova Senha do Usuário:");
-        usuario.setSenha(sc.nextLine());
-        System.out.println("Digite o Novo CPF do Usuário:");
-        usuario.setCpf(sc.nextLine());
-
-        usuarioDao.update(usuario);
-        System.out.println("Atualização Completa!");
-    } else {
-        System.out.println("Usuário não encontrado.");
-    }
-}
-
-static void listarUsuarios() {
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-
-    List<Usuario> userList = usuarioDao.findAll();
-    for (Usuario user : userList) {
-        System.out.println(user);
-    }
-}
-
-static void listarUsuarioPorID() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-
-    System.out.println("Informe o ID do usuário a ser exibido:");
-    int userId = sc.nextInt();
-    Usuario usuario = usuarioDao.findById(userId);
-
-    if (usuario != null) {
-        System.out.println(usuario);
-    } else {
-        System.out.println("Usuário não encontrado.");
-    }
-}
-
-static void deletarUsuario() {
-    Scanner sc = new Scanner(System.in);
-    UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-
-    System.out.print("Insira o ID do Usuário a ser Excluído: ");
-    int userId = sc.nextInt();
-    boolean deleted = usuarioDao.deleteById(userId);
-
-    if (deleted) {
-        System.out.println("Usuário Excluído!");
-    } else {
-        System.out.println("Usuário não encontrado.");
-    }
-}
-}
-=======
 
     /* ---------- FORNECEDOR ---------- */
 
@@ -572,8 +481,4 @@ static void deletarUsuario() {
         vendasDao.deleteById(idVendas);
         System.out.println("Venda Excluida!");
     }
-
 }
-
-
->>>>>>> aad5db726948dab3c0943a90408cb7a74149faa0

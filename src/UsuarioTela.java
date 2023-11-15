@@ -33,14 +33,10 @@ public class UsuarioTela {
                 String nome = JOptionPane.showInputDialog("Digite o nome do usuário:");
                 textArea.append("Digite o CPF do usuário:\n");
                 String cpf = JOptionPane.showInputDialog("Digite o CPF do usuário:");
-
-                // Insira o usuário no banco de dados
                 usuarioDao.insert(new Usuario(null, senha, nome, cpf));
-
                 textArea.append("Usuário adicionado com sucesso!\n");
             }
         });
-
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,7 +55,6 @@ public class UsuarioTela {
                 }
             }
         });
-
         listByIdButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,7 +68,6 @@ public class UsuarioTela {
                 }
             }
         });
-
         listButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,7 +82,6 @@ public class UsuarioTela {
                 }
             }
         });
-
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,7 +91,6 @@ public class UsuarioTela {
                 textArea.setText("Usuário excluído com Sucesso!\n");
             }
         });
-
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,10 +108,8 @@ public class UsuarioTela {
                 mainFrame.setVisible(true);
             }
         });
-
         this.usuarioDao = DaoFactory.createUsuarioDao();
     }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("UsuarioTela");
