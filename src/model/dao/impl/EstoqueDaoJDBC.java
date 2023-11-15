@@ -19,7 +19,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
     }
 
     @Override
-    public void insert(Estoque obj) {
+    public Estoque insertEstoque(Estoque obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -43,6 +43,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
                 if (rs.next()) {
                     int idEstoque = rs.getInt(1);
                     obj.setIdEstoque(idEstoque);
+                    return obj;
                 }
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
@@ -53,6 +54,7 @@ public class EstoqueDaoJDBC implements EstoqueDao {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return null;
     }
 
     @Override

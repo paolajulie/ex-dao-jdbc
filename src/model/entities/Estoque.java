@@ -9,25 +9,22 @@ public class Estoque implements Serializable {
     private Integer idEstoque;
     private float custo;
     private String descricao;
-    private Integer qtd;
+    private Integer quantidade;
     private Integer min;
     private Integer max;
-    private String unidade;
-    private Boolean status;
+    private Boolean statusEstoque;
 
-    public Estoque(Object object, Float custo2, String descricao2, int quantidade, int min2, int max2, boolean statusEstoque) {
-    }
 
-    public Estoque(Integer idEstoque, float custo, String descricao, Integer qtd, Integer min, Integer max, String unidade, Boolean status) {
+    public Estoque(Integer idEstoque, Float custo, String descricao, Integer quantidade, Integer min, Integer max, Boolean statusEstoque) {
         this.idEstoque = idEstoque;
         this.custo = custo;
         this.descricao = descricao;
-        this.qtd = qtd;
+        this.quantidade = quantidade;
         this.min = min;
         this.max = max;
-        this.unidade = unidade;
-        this.status = status;
+        this.statusEstoque = statusEstoque;
     }
+
 
     public Estoque() {
     }
@@ -56,14 +53,6 @@ public class Estoque implements Serializable {
         this.descricao = descricao;
     }
 
-    public Integer getQtd() {
-        return qtd;
-    }
-
-    public void setQtd(Integer qtd) {
-        this.qtd = qtd;
-    }
-
     public Integer getMin() {
         return min;
     }
@@ -80,20 +69,20 @@ public class Estoque implements Serializable {
         this.max = max;
     }
 
-    public String getUnidade() {
-        return unidade;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public void setUnidade(String unidade) {
-        this.unidade = unidade;
+    public void setStatusEstoque(Boolean statusEstoque) {
+        this.statusEstoque = statusEstoque;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public Boolean getStatusEstoque() {
+        return statusEstoque;
     }
 
 
@@ -115,30 +104,14 @@ public class Estoque implements Serializable {
             return false;
         Estoque other = (Estoque) obj;
         if (idEstoque == null) {
-            if (other.idEstoque != null)
-                return false;
-        } else if (!idEstoque.equals(other.idEstoque))
-            return false;
-        return true;
+            return other.idEstoque == null;
+        } else return idEstoque.equals(other.idEstoque);
     }
 
     @Override
     public String toString() {
-        return "Estoque [idEstoque=" + idEstoque + ", custo=" + custo + ", descricao=" + descricao + ", qtd=" + qtd
-                + ", min=" + min + ", max=" + max + ", unidade=" + unidade + ", status=" + status + "]";
-    }
-
-    public void setQuantidade(int parseInt) {
-    }
-
-    public void setStatusEstoque(boolean parseBoolean) {
-    }
-
-    public int getQuantidade() {
-        return 0;
-    }
-
-    public boolean getStatusEstoque() {
-        return false;
+        return "Estoque [idEstoque=" + idEstoque + ", custo=" + custo + ", descricao=" + descricao + ", quantidade=" + quantidade
+                + ", min=" + min + ", max=" + max + ",  statusEstoque=" + statusEstoque + "]";
     }
 }
+

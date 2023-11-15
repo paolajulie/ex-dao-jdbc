@@ -118,20 +118,23 @@ public class Funcoes {
         boolean statusEstoque = Boolean.parseBoolean(sc.nextLine());
 
         Estoque newEstoque = new Estoque(null, custo, descricao, quantidade, min, max, statusEstoque);
-        estoqueDao.insert(newEstoque);
+        estoqueDao.insertEstoque(newEstoque);
         System.out.println("Adicionado! Novo idEstoque: " + newEstoque.getIdEstoque());
-        sc.close();
     }
 
-    static void atualizarEstoque(){
+    static void atualizarEstoque() {
         Scanner sc = new Scanner(System.in);
         EstoqueDao estoqueDao = DaoFactory.createEstoqueDao();
 
         System.out.println("-----------------------------\n");
         System.out.println("|    Atualizar Estoque      |\n");
         System.out.println("-----------------------------\n");
+
         System.out.println("Informe o ID do estoque que deseja atualizar:");
-        Estoque estoque = estoqueDao.findById(sc.nextInt());
+        int idEstoque = sc.nextInt();
+        sc.nextLine();
+
+        Estoque estoque = estoqueDao.findById(idEstoque);
         System.out.println("Digite o Custo do Estoque:");
         estoque.setCusto(Float.parseFloat(sc.nextLine()));
         System.out.println("Digite a Descrição do Estoque:");
@@ -145,8 +148,8 @@ public class Funcoes {
         System.out.println("Digite o Status do Estoque (true/false):");
         estoque.setStatusEstoque(Boolean.parseBoolean(sc.nextLine()));
         estoqueDao.update(estoque);
-        System.out.println("Atualização Completa!");
-        sc.close();
+        System.out.println("Estoque Atualizado com sucesso!");
+
     }
 
     static void listarEstoque(){
@@ -171,7 +174,7 @@ public class Funcoes {
         System.out.println("Informe o ID do estoque a ser exibido:");
         Estoque estoque = estoqueDao.findById(sc.nextInt());
         System.out.println(estoque);
-        sc.close();
+
     }
 
     static void deletarEstoque(){
@@ -182,7 +185,7 @@ public class Funcoes {
         int idEstoque = sc.nextInt();
         estoqueDao.deleteById(idEstoque);
         System.out.println("Estoque Excluído!");
-        sc.close();
+
     }
 
     /* ---------- FORNECEDOR ---------- */
