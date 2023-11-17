@@ -49,4 +49,8 @@ CREATE TABLE Vendas (
     idVendas INT AUTO_INCREMENT PRIMARY KEY,
     observacao VARCHAR(255),
     dataSaida DATE
+<<<<<<< HEAD
 );
+=======
+);
+>>>>>>> 5f45003cbf41a9d283837926736eeb50909b0a19
