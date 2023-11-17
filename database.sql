@@ -45,5 +45,5 @@ CREATE TABLE Usuario (
 CREATE TABLE Vendas (
     idVendas INT AUTO_INCREMENT PRIMARY KEY,
     observacao VARCHAR(255),
-    dataEntrada DATE
+    dataSaida DATE
 );
