@@ -43,8 +43,8 @@ public class EntradaTela {
                     return;
                 }
                 textArea.append("Data de entrada: " + sdf.format(dataEntrada) + "\n");
-                Entrada novaEntrada = entradaDao.insertEntrada(new Entrada(null, observacao, dataEntrada));
-                textArea.append("Entrada adicionada com ID: " + novaEntrada.getIdEntrada() + "\n");
+                Entrada novoEntrada = entradaDao.insertEntrada(new Entrada(null, observacao, dataEntrada));
+                textArea.append("Entrada adicionada com ID: " + novoEntrada.getIdEntrada() + "\n");
             }
         });
         updateButton.addActionListener(new ActionListener() {

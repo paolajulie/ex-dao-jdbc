@@ -19,7 +19,7 @@ public class VendasDaoJDBC implements VendasDao {
     }
 
     @Override
-    public void insert(Vendas obj) {
+    public Vendas insert(Vendas obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -49,6 +49,7 @@ public class VendasDaoJDBC implements VendasDao {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return obj;
     }
 
     @Override
@@ -117,9 +118,9 @@ public class VendasDaoJDBC implements VendasDao {
             rs = st.executeQuery();
             if (rs.next()) {
                 Vendas obj = new Vendas();
-                obj.setIdVendas(rs.getInt("IdEntrada"));
+                obj.setIdVendas(rs.getInt("IdVendas"));
                 obj.setObservacao(rs.getString("observacao"));
-                obj.setDataEntrada(rs.getDate("dataSaida"));
+                obj.setDataSaida(rs.getDate("dataSaida"));
                 return obj;
             }
             return null;

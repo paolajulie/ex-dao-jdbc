@@ -1,3 +1,6 @@
+-- Para quem ja tem a tabele feita use o seguinte comando :
+-- ALTER TABLE Vendas dataEntrada dataSaida date;
+
 CREATE DATABASE tradeon;
 
 USE tradeon;
@@ -45,5 +48,5 @@ CREATE TABLE Usuario (
 CREATE TABLE Vendas (
     idVendas INT AUTO_INCREMENT PRIMARY KEY,
     observacao VARCHAR(255),
-    dataEntrada DATE
+    dataSaida DATE
 );

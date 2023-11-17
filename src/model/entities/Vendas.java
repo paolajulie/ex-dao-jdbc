@@ -74,13 +74,4 @@ public class Vendas implements Serializable {
         return "Vendas [idVendas=" + idVendas + ", observacao=" + observacao + ", dataSaida=" + dataSaida + "]";
     }
 
-    public Date getDataEntrada() {
-        return null;
-    }
-
-    public void setDataEntrada(java.sql.Date date) {
-    }
-
-    public void setDataEntrada(Date dataEntrada) {
-    }
 }

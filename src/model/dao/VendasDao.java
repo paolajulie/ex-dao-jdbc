@@ -5,7 +5,7 @@ import model.entities.Vendas;
 
 public interface VendasDao {
 
-    void insert(Vendas obj);
+    Vendas insert(Vendas obj);
     void update(Vendas obj);
     void deleteById(Integer idVendas);
     Vendas findById(Integer idVendas);
