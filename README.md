@@ -9,7 +9,7 @@ O sistema inclui as seguintes operações para cada entidade:
 ### Entrada
 
    **Tabela do Banco de Dados:**
-   ```sql
+   
    CREATE TABLE Entrada (
     idEntrada INT AUTO_INCREMENT PRIMARY KEY,
     observacao VARCHAR(255),
@@ -32,7 +32,7 @@ O sistema inclui as seguintes operações para cada entidade:
 ### Estoque
 
    **Tabela do Banco de Dados:**
-   ```sql
+
    CREATE TABLE Estoque (
     idEstoque INT AUTO_INCREMENT PRIMARY KEY,
     custo FLOAT NOT NULL,
@@ -58,7 +58,7 @@ O sistema inclui as seguintes operações para cada entidade:
 ### Fornecedor
 
    **Tabela do Banco de Dados:**
-   ```sql
+
    CREATE TABLE Fornecedor (
     idFornecedor INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(80),
@@ -85,7 +85,7 @@ O sistema inclui as seguintes operações para cada entidade:
 ### Produto
 
    **Tabela do Banco de Dados:**
-   ```sql
+
    CREATE TABLE Produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -101,18 +101,18 @@ O sistema inclui as seguintes operações para cada entidade:
    - Possibilita a atualização das informações de um produto existente.
 
 3. 📋 **Listagem de Produtos:**
-   - Exibe uma lista completa de todos os produtos em estoque.
+   - Exibe uma lista completa de todos os produtos.
 
 4. 🔍 **Listagem de Produtos por ID:**
    - Mostra informações detalhadas de um produto específico.
 
 5. 🗑️ **Exclusão de Produto:**
-   - Permite excluir um produto do estoque.
+   - Permite excluir um produto.
 
 ### Usuário
 
    **Tabela do Banco de Dados:**
-   ```sql
+
    CREATE TABLE Usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     senha VARCHAR(16),
@@ -138,7 +138,7 @@ O sistema inclui as seguintes operações para cada entidade:
 ### Saída
 
    **Tabela do Banco de Dados:**
-   ```sql
+
    CREATE TABLE Vendas (
     idVendas INT AUTO_INCREMENT PRIMARY KEY,
     observacao VARCHAR(255),
